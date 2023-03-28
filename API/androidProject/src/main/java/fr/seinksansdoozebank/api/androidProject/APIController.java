@@ -1,18 +1,16 @@
 package fr.seinksansdoozebank.api.androidProject;
 
 
-import fr.seinksansdoozebank.api.androidProject.model.Item;
-import fr.seinksansdoozebank.api.androidProject.model.ListOfItems;
+import fr.seinksansdoozebank.api.androidProject.model.ListOfVoitures;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class APIController {
 
 
-    ListOfItems listOfItems;
+    ListOfVoitures listOfVoitures;
 
 
     /**
@@ -22,8 +20,8 @@ public class APIController {
     @GetMapping("/allItems")
     public ArrayList<String> listOfItems()
     {
-         listOfItems= ListOfItems.getInstance();
-         return listOfItems.getListInString();
+         listOfVoitures = ListOfVoitures.getInstance();
+         return listOfVoitures.getListInString();
     }
 
 
@@ -35,8 +33,8 @@ public class APIController {
     @GetMapping("/oneItem/{item-id}")
     public String getOneItem(@PathVariable("item-id") int id)
     {
-        listOfItems= ListOfItems.getInstance();
-        return listOfItems.get(id).toString();
+        listOfVoitures = ListOfVoitures.getInstance();
+        return listOfVoitures.get(id).toString();
     }
 
 
