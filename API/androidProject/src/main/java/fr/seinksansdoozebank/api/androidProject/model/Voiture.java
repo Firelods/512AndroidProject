@@ -23,13 +23,20 @@ public class Voiture {
         this.description = description;
     }
 
-    @Override
+
     public String toString() {
         return "Voiture{" +
                 "id=" + id +
-                ", nom ='" + nom + '\'' +
-                ", marque ='" + marque + '\'' +
+                ", nom='" + nom + '\'' +
+                ", marque='" + marque + '\'' +
+                ", description='" + description + '\'' +
+                ", prix=" + prix +
+                ", image='" + image + '\'' +
                 '}';
     }
 
+    public int getId()
+    {
+        return this.id;
+    }
 }

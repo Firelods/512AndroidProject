@@ -34,7 +34,7 @@ public class APIController {
     public String getOneItem(@PathVariable("item-id") int id)
     {
         listOfVoitures = ListOfVoitures.getInstance();
-        return listOfVoitures.get(id).toString();
+        return listOfVoitures.getId(id);
     }
 
 
