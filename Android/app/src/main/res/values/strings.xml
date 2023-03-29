@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">app512</string>
+    <string name="app_name">512Car</string>
+    <string name="appName">512Car</string>
+    <string name="purchase_icon_description">Icon of a shopping cart</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_price">XXXXX.XX€</string>
+    <string name="product_image_description">Image of the car</string>
 </resources>
