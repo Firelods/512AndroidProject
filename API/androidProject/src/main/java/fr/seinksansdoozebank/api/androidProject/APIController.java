@@ -18,7 +18,7 @@ public class APIController {
      * @return the ArrayList of items convert into Strings
      */
     @GetMapping("/allItems")
-    public ArrayList<String> listOfItems()
+    public String listOfItems()
     {
          listOfVoitures = ListOfVoitures.getInstance();
          return listOfVoitures.getListInString();

@@ -24,19 +24,53 @@ public class Voiture {
     }
 
 
-    public String toString() {
-        return "Voiture{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", marque='" + marque + '\'' +
-                ", description='" + description + '\'' +
-                ", prix=" + prix +
-                ", image='" + image + '\'' +
-                '}';
-    }
 
     public int getId()
     {
         return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getMarque() {
+        return marque;
+    }
+
+    public void setMarque(String marque) {
+        this.marque = marque;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

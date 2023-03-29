@@ -1,5 +1,8 @@
 package fr.seinksansdoozebank.api.androidProject.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 
 public class ListOfVoitures extends ArrayList<Voiture> {
@@ -36,13 +39,18 @@ public class ListOfVoitures extends ArrayList<Voiture> {
         add(new Voiture(18,"911","Porsche",41231.32,null,"Voiture embleme de Porsche qui reflete le savoir faire de la marque"));
 
     }
-    public ArrayList<String> getListInString() {
-        ArrayList<String> res = new ArrayList<>();
-        for(Voiture i : list)
-        {
-            res.add(i.toString());
+    public String getListInString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json;
+        try {
+            System.out.println(list);
+            json = mapper.writeValueAsString(list);
+            System.out.println(json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
-        return res;
+
+        return json;
     }
     public String getId(int id) {
         boolean founded=false;
