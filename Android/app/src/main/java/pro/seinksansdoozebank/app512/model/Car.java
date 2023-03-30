@@ -2,18 +2,7 @@ package pro.seinksansdoozebank.app512.model;
 
 import androidx.annotation.NonNull;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-public class Voiture {
+public class Car {
     private final int id;
     private final String nom;
     private final String marque;
@@ -22,7 +11,7 @@ public class Voiture {
     private final String image;
 
 
-    public Voiture(int id, String nom, String marque, String description, double prix, String image) {
+    public Car(int id, String nom, String marque, String description, double prix, String image) {
         this.id = id;
         this.nom = nom;
         this.marque = marque;
@@ -42,5 +31,30 @@ public class Voiture {
                 ", prix=" + prix +
                 ", image='" + image + '\'' +
                 '}';
+    }
+
+
+    public int getID() {
+        return id;
+    }
+
+    public String getName() {
+        return nom;
+    }
+
+    public String getMarque() {
+        return marque;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getPrice() {
+        return prix;
+    }
+
+    public String getImage() {
+        return image;
     }
 }

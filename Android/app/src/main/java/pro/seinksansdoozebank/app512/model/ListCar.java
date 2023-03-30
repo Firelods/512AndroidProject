@@ -12,11 +12,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class ListVoiture extends ArrayList<Voiture> {
+public class ListCar extends ArrayList<Car> {
     /**
      * Objet de connection à l'API
      */
@@ -29,16 +28,16 @@ public class ListVoiture extends ArrayList<Voiture> {
     /**
      * Singleton de la liste des voitures
      */
-    private static ListVoiture instance;
+    private static ListCar instance;
 
     /**
      * Retourne l'instance de la liste des voitures
      *
      * @return le singleton de la liste des voitures
      */
-    public static ListVoiture getInstance() {
+    public static ListCar getInstance() {
         if (instance == null) {
-            instance = new ListVoiture();
+            instance = new ListCar();
         }
         return instance;
     }
@@ -46,7 +45,7 @@ public class ListVoiture extends ArrayList<Voiture> {
     /**
      * Constructeur de la liste des voitures en faisant une requête à l'API
      */
-    public ListVoiture() {
+    private ListCar() {
         super();
         new Thread(() -> {
             try {
@@ -88,9 +87,8 @@ public class ListVoiture extends ArrayList<Voiture> {
                             String description = jsonObject.getString("description");
                             double prix = jsonObject.getDouble("prix");
                             String image = jsonObject.getString("image");
-                            Voiture voiture = new Voiture(id, nom, marque, description, prix, image);
-                            Log.d("voiture", voiture.toString());
-                            this.add(voiture);
+                            Car car = new Car(id, nom, marque, description, prix, image);
+                            this.add(car);
                         }
                     }
 
