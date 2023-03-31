@@ -6,4 +6,8 @@
     <string name="product_price">XXXXX.XX€</string>
     <string name="product_image_description">Image of the car</string>
     <string name="product_brand">Brand</string>
+    <string name="buy_button_text">Commander</string>
+    <string name="back_arrow_description">An arrow allowing to return to the previous screen</string>
+    <string name="map_title">Lieu de livraison</string>
+    <string name="confirm_place_button">Valider</string>
 </resources>

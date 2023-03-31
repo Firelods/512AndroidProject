@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageButton button = findViewById(R.id.purchases_button);
-        button.setOnClickListener(v -> ListCar.getInstance());
+//        button.setOnClickListener(v -> ListCar.getInstance());
         ListView listView = findViewById(R.id.car_list);
         listView.setAdapter(new CarAdapter(this));
     }
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
     @Override
     public void onClickProduct(Car item) {
         Intent intent = new Intent(this, CarDetailActivity.class);
-        intent.putExtra("car", item.getID());
+        intent.putExtra("carId", item.getID());
         startActivity(intent);
     }
 
