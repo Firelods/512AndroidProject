@@ -48,6 +48,44 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </Toolbar>
+    <LinearLayout
+        android:id="@+id/dyn_layout"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+
+        android:padding="10dip" >
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="220dp"
+            android:layout_height="75dp"
+            android:autofillHints="@string/saisir_l_adresse_de_livraison"
+
+
+            android:gravity="center_horizontal"
+            android:hint="@string/saisir_l_adresse_de_livraison"
+            android:inputType="textPostalAddress"
+            android:padding="20dp"
+            android:ems="10"
+            android:layout_marginEnd="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/research"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:background="@drawable/bg_rounded_corner"
+            android:backgroundTint="@color/blue"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/rechercher"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/valid_place_button"
@@ -59,7 +97,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textSize="30sp"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="375dp"
         android:background="@drawable/bg_rounded_corner"
         android:backgroundTint="@color/blue"/>
 

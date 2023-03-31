@@ -49,7 +49,7 @@ public class ListCar extends ArrayList<Car> {
         super();
         new Thread(() -> {
             try {
-                URL url = new URL("http://192.168.1.91:8080/allItems");
+                URL url = new URL("http://192.168.1.85:8080/allItems");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("Content-Type", "application/json; utf-8");

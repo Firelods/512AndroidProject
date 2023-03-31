@@ -10,4 +10,6 @@
     <string name="back_arrow_description">An arrow allowing to return to the previous screen</string>
     <string name="map_title">Lieu de livraison</string>
     <string name="confirm_place_button">Valider</string>
+    <string name="saisir_l_adresse_de_livraison">Saisir l\'adresse de livraison</string>
+    <string name="rechercher">Rechercher</string>
 </resources>
