@@ -33,7 +33,10 @@ public class MapActivity extends AppCompatActivity {
     private EditText address;
     InputStream inputStream;
     int responseCode;
-    ArrayList<Double> coordinates;
+    ArrayList<ArrayList<Double>> coordinates;
+
+
+    private final String api_free_key = "46c2f2b1018e200de3b74d95f0006e5c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +49,9 @@ public class MapActivity extends AppCompatActivity {
         this.address = findViewById(R.id.address);
         Button rechercher = findViewById(R.id.research);
         rechercher.setOnClickListener(e->{
-            String txt = address.getText().toString().replace(" ", "+" );
+            String txt = address.getText().toString();
             if(txt.length() > 0){
+                this.coordinates.clear();
                 research(txt);
                 buyButton.setEnabled(true);
 
@@ -64,7 +68,7 @@ public class MapActivity extends AppCompatActivity {
     private void research(String address) {
         new Thread(() -> {
             try {
-                URL url = new URL("https://api-adresse.data.gouv.fr/search/?q="+address);
+                URL url = new URL("http://api.positionstack.com/v1/forward?access_key="+this.api_free_key+"&query="+address+"&results.map_url");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -94,17 +98,16 @@ public class MapActivity extends AppCompatActivity {
                     inputStream.close();
                     if (data.length() > 0) {
                         JSONObject jsonObject = new JSONObject(data.toString());
-                        JSONArray jsonArray = jsonObject.getJSONArray("features");
-                        for(int i =0;i<jsonArray.length();i++){
-                            JSONObject tempObject = jsonArray.getJSONObject(i);
-                            JSONObject geometry = tempObject.getJSONObject("geometry");
-                            JSONArray coordinates = geometry.getJSONArray("coordinates");
-                            for(int w =0;w<coordinates.length();w++){
-                                this.coordinates.add(coordinates.getDouble(w));
-                            }
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            ArrayList<Double> coord = new ArrayList<>();
+                            coord.add(object.getDouble("latitude"));
+                            coord.add(object.getDouble("longitude"));
+                            this.coordinates.add(coord);
                         }
+                        Log.d("coord", coordinates.toString());
 
-                        Log.d("coordinates", this.coordinates.toString());
                     }
 
                 } catch (IOException e) {
