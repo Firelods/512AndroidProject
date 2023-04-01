@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.CarDetailActivity"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:background="@color/white">
+    tools:context=".views.CarDetailActivity">
 
     <Toolbar
         android:id="@+id/my_toolbar"
@@ -37,10 +37,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:text="@string/product_name"
                 android:textColor="@color/white"
                 android:textSize="36sp"
-                android:layout_marginStart="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/back_button"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,18 +48,73 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </Toolbar>
-    <Button
-        android:id="@+id/buy_button"
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/buy_button_text"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:textSize="30sp"
-        android:layout_marginTop="500dp"
-        android:background="@drawable/bg_rounded_corner"
-        android:backgroundTint="@color/blue"/>
+        android:layout_height="match_parent"
+        android:gravity="top|center"
+        android:orientation="vertical"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+
+        <ImageView
+            android:id="@+id/car_image"
+            android:layout_width="280dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/car"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="220dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/car_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/product_name"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/car_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/product_description"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+            </LinearLayout>
+        </ScrollView>
+        <TextView
+            android:id="@+id/car_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:text="@string/product_price"
+            android:textColor="@color/black"
+            android:layout_marginTop="15dp"/>
+        <Button
+            android:id="@+id/buy_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_rounded_corner"
+            android:backgroundTint="@color/blue"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="@string/buy_button_text"
+            android:textSize="30sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

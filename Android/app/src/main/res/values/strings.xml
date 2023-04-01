@@ -16,5 +16,6 @@
     <string name="channel_id">512Cars</string>
     <string name="notification_title">Confirmation de commande</string>
     <string name="notification_text">512Cars vous remercie pour votre achat ! Votre commande a bien été prise en compte.</string>
+    <string name="product_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dapibus libero urna, a auctor sem feugiat et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam rhoncus ullamcorper ligula, in porttitor nisl ultrices non. Fusce malesuada mattis condimentum. Integer laoreet erat a leo congue cursus.</string>
 
 </resources>
