@@ -16,6 +16,7 @@ public class CarAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private CarAdapterListener listener;
 
+
     public CarAdapter(CarAdapterListener listener) {
         this.inflater = LayoutInflater.from(listener.getContext());
         this.listener = listener;
@@ -44,6 +45,8 @@ public class CarAdapter extends BaseAdapter {
 
         TextView carBrand = layoutItem.findViewById(R.id.product_brand);
         carBrand.setText(ListCar.getInstance().get(i).getMarque());
+
+
         carBrand.setTypeface(Typeface.DEFAULT_BOLD);
 
 

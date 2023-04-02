@@ -8,17 +8,16 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import pro.seinksansdoozebank.app512.views.CarDetailActivity;
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.util.CarAdapter;
 import pro.seinksansdoozebank.app512.model.Car;
-import pro.seinksansdoozebank.app512.model.ListCar;
 import pro.seinksansdoozebank.app512.util.CarAdapterListener;
 
 public class MainActivity extends AppCompatActivity implements CarAdapterListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageButton button = findViewById(R.id.purchases_button);
@@ -38,4 +37,8 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
     public Context getContext() {
         return this.getApplicationContext();
     }
+
+
+
+
 }
