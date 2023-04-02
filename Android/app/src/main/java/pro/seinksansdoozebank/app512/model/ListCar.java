@@ -13,6 +13,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import pro.seinksansdoozebank.app512.views.MainActivity;
+
 public class ListCar extends ArrayList<Car> {
     /**
      * Objet de connection à l'API
@@ -92,8 +94,11 @@ public class ListCar extends ArrayList<Car> {
                             Car car = new Car(id, nom, marque, description, prix, image);
                             this.add(car);
                         }
-
-                    }
+                       synchronized (MainActivity.sync) {
+                           MainActivity.sync.notify();
+                           System.out.println("notify");
+                       }
+                 }
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -101,7 +106,6 @@ public class ListCar extends ArrayList<Car> {
                     throw new RuntimeException(e);
                 }
             }
-
         }).start();
     }
 

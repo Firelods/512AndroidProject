@@ -44,8 +44,8 @@ import pro.seinksansdoozebank.app512.model.Car;
 public class MapActivity extends AppCompatActivity {
     private EditText address;
     private Button buyButton;
-    InputStream inputStream;
     int responseCode;
+    InputStream inputStream;
     private ArrayList<ArrayList<Double>> coordinates;
     private ArrayList<OverlayItem> points;
     private MapView map;

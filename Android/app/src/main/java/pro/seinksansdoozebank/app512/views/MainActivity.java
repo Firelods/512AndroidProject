@@ -13,16 +13,28 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import pro.seinksansdoozebank.app512.R;
+import pro.seinksansdoozebank.app512.model.ListCar;
 import pro.seinksansdoozebank.app512.util.CarAdapter;
 import pro.seinksansdoozebank.app512.model.Car;
 import pro.seinksansdoozebank.app512.util.CarAdapterListener;
 
 public class MainActivity extends AppCompatActivity implements CarAdapterListener {
 
+    public static final Object sync = new Object();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ListCar.getInstance();
+        synchronized (sync) {
+            try {
+                Log.d("MainActivity", "Waiting for sync");
+                sync.wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
         createNotificationChannel();
         ImageButton button = findViewById(R.id.purchases_button);
         ListView listView = findViewById(R.id.car_list);

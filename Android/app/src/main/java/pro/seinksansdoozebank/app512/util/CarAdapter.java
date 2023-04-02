@@ -1,5 +1,6 @@
 package pro.seinksansdoozebank.app512.util;
 
+
 import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.model.ListCar;
+import pro.seinksansdoozebank.app512.views.MainActivity;
 
 public class CarAdapter extends BaseAdapter {
 
@@ -44,6 +46,15 @@ public class CarAdapter extends BaseAdapter {
         layoutItem = view == null ? inflater.inflate(R.layout.car_item, viewGroup, false) : view;
 
         TextView carBrand = layoutItem.findViewById(R.id.product_brand);
+        ListCar.getInstance();
+//        synchronized (MainActivity.sync) {
+//            try {
+//                System.out.println("Waiting for sync");
+//                MainActivity.sync.wait();
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
         carBrand.setText(ListCar.getInstance().get(i).getMarque());
 
 
