@@ -68,7 +68,6 @@ public class MapActivity extends AppCompatActivity {
         int carId = getIntent().getIntExtra("carId", 0);
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(v -> finish());
-        Button buyButton = findViewById(R.id.valid_place_button);
         this.coordinates = new ArrayList<>();
         buyButton = findViewById(R.id.valid_place_button);
         buyButton.setEnabled(false);
@@ -106,13 +105,13 @@ public class MapActivity extends AppCompatActivity {
                 }
                 if(this.points.size()>0)
                 {
-                    map.getController().setCenter(new GeoPoint(this.coordinates.get(0).get(0), this.coordinates.get(0).get(1)));
-                    map.getController().setZoom(4.0);
+                    map.getController().animateTo(new GeoPoint(this.coordinates.get(0).get(0), this.coordinates.get(0).get(1)));
+                    map.getController().setZoom(17.0);
                 }
                 else{
                     map.getController().setCenter(startPoint);
                     map.getController().setZoom(4.0);
-
+                    buyButton.setEnabled(false);
                     Toast toast = Toast.makeText(getApplicationContext(), "Adresse Invalide", Toast.LENGTH_SHORT);
                     toast.show();
 
