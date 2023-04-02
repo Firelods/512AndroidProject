@@ -104,7 +104,7 @@ public class MapActivity extends AppCompatActivity {
                 if(this.points.size()>0)
                 {
                     map.getController().setCenter(new GeoPoint(this.coordinates.get(0).get(0), this.coordinates.get(0).get(1)));
-                    map.getController().setZoom(17.0);
+                    map.getController().setZoom(4.0);
                 }
                 else{
                     map.getController().setCenter(startPoint);
