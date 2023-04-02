@@ -1,7 +1,5 @@
 package pro.seinksansdoozebank.app512.model;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +28,9 @@ public class ListCar extends ArrayList<Car> {
      */
     private static ListCar instance;
 
+
+
+
     /**
      * Retourne l'instance de la liste des voitures
      *
@@ -46,10 +47,11 @@ public class ListCar extends ArrayList<Car> {
      * Constructeur de la liste des voitures en faisant une requête à l'API
      */
     private ListCar() {
+
         super();
         new Thread(() -> {
             try {
-                URL url = new URL("http://192.168.1.91:8080/allItems");
+                URL url = new URL("http://64.225.109.223:8083/allItems");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -90,6 +92,7 @@ public class ListCar extends ArrayList<Car> {
                             Car car = new Car(id, nom, marque, description, prix, image);
                             this.add(car);
                         }
+
                     }
 
                 } catch (IOException e) {
@@ -101,4 +104,5 @@ public class ListCar extends ArrayList<Car> {
 
         }).start();
     }
+
 }

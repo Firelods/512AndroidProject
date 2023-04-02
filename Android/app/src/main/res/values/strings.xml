@@ -19,4 +19,6 @@
     <string name="product_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dapibus libero urna, a auctor sem feugiat et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam rhoncus ullamcorper ligula, in porttitor nisl ultrices non. Fusce malesuada mattis condimentum. Integer laoreet erat a leo congue cursus.</string>
 
 
+    <string name="saisir_l_adresse_de_livraison">Saisir l\'adresse de livraison</string>
+    <string name="rechercher">Rechercher</string>
 </resources>

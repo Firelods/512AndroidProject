@@ -12,11 +12,9 @@ import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import pro.seinksansdoozebank.app512.views.CarDetailActivity;
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.util.CarAdapter;
 import pro.seinksansdoozebank.app512.model.Car;
-import pro.seinksansdoozebank.app512.model.ListCar;
 import pro.seinksansdoozebank.app512.util.CarAdapterListener;
 
 public class MainActivity extends AppCompatActivity implements CarAdapterListener {
