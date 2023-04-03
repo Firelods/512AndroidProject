@@ -138,4 +138,19 @@ public class PaymentActivity extends AppCompatActivity {
     {
         datePickerDialog.show();
     }
+
+
+    private void checkPayment()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Paiement");
+        builder.setMessage("Paiement accepté");
+
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
+
+        builder.show();
+    }
 }
