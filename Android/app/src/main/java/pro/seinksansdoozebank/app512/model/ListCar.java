@@ -32,6 +32,8 @@ public class ListCar extends ArrayList<Car> {
 
     private boolean alreadyLoad = false;
 
+    public static boolean isReady = false;
+
 
 
 

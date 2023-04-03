@@ -38,9 +38,12 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
                 }
             }
         }
-
         createNotificationChannel();
         ImageButton button = findViewById(R.id.purchases_button);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PurchasesActivity.class);
+            startActivity(intent);
+        });
         ListView listView = findViewById(R.id.car_list);
         listView.setAdapter(new CarAdapter(this));
     }

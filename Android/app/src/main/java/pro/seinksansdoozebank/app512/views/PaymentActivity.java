@@ -11,17 +11,33 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.JsonWriter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.Calendar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Date;
 
 import pro.seinksansdoozebank.app512.R;
 
@@ -33,19 +49,62 @@ public class PaymentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         ImageButton backButton = findViewById(R.id.back_button);
-        int carId = getIntent().getIntExtra("carId", 0);
+        int carId = getIntent().getIntExtra("carId", -1);
+        int latitude = getIntent().getIntExtra("latitude", -1);
+        int longitude = getIntent().getIntExtra("longitude", -1);
         backButton.setOnClickListener(v -> finish());
         Button buyButton = findViewById(R.id.buy_button);
-        buyButton.setOnClickListener(v -> {
+        EditText firstName = findViewById(R.id.firstName);
+        EditText lastName = findViewById(R.id.lastName);
 
-            sendConfirmationNotification();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        });
         initDatePicker();
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
         dateButton.setOnClickListener(v -> datePickerDialog.show());
+
+        buyButton.setOnClickListener(v -> {
+            if(savePurchaseToJSON(carId, String.valueOf(firstName.getText()), String.valueOf(lastName.getText()), String.valueOf(dateButton.getText()), latitude, longitude)){
+                sendConfirmationNotification();
+                //TODO rajouter la page de confirmation de paiement
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+
+    private boolean savePurchaseToJSON(int carId, String name, String lastName, String date, double latitude, double longitude) {
+        JSONObject root = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("carId", carId);
+            jsonObject.put("name", name);
+            jsonObject.put("lastName", lastName);
+            jsonObject.put("date", date);
+            jsonObject.put("latitude", latitude);
+            jsonObject.put("longitude", longitude);
+            jsonArray.put(jsonObject);
+            root.put("purchases", jsonArray);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        String FILENAME = "purchases.json";
+        String jsonString = root.toString();
+        try {
+            FileOutputStream fos = this.getApplicationContext().openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            if (jsonString != null) {
+                fos.write(jsonString.getBytes());
+            }
+            fos.close();
+            return true;
+        } catch (FileNotFoundException fileNotFound) {
+            return false;
+        } catch (IOException ioException) {
+            return false;
+        }
+
     }
 
     private void sendConfirmationNotification() {
