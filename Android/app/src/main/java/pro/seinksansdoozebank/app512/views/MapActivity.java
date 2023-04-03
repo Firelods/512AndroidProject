@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -89,6 +91,9 @@ public class MapActivity extends AppCompatActivity {
         ONCLICK LISTENER
          */
         rechercher.setOnClickListener(e->{
+            final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
             String txt = address.getText().toString();
             if(txt.length() > 0){
                 map.getOverlays().clear();
