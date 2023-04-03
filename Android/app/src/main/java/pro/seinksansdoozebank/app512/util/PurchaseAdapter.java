@@ -1,6 +1,5 @@
 package pro.seinksansdoozebank.app512.util;
 
-
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,35 +13,39 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.model.ListCar;
-import pro.seinksansdoozebank.app512.views.MainActivity;
+import pro.seinksansdoozebank.app512.model.Purchase;
 
-public class CarAdapter extends BaseAdapter {
-
+public class PurchaseAdapter extends BaseAdapter {
+    private final List<Purchase> purchaseList;
     private LayoutInflater inflater;
-    private CarAdapterListener listener;
+    private AppCompatActivity listener;
     private Bitmap carBitmap;
 
     private final Object synchro = new Object();
 
-    public CarAdapter(CarAdapterListener listener) {
-        this.inflater = LayoutInflater.from(listener.getContext());
-        this.listener = listener;
+    public PurchaseAdapter(AppCompatActivity activity, List<Purchase> purchases) {
+        this.inflater = LayoutInflater.from(activity.getApplicationContext());
+        this.listener = activity;
+        this.purchaseList = purchases;
     }
 
     @Override
     public int getCount() {
-        return ListCar.getInstance().size();
+        return purchaseList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return ListCar.getInstance().get(i);
+        return purchaseList.get(i);
     }
 
     @Override
@@ -55,21 +58,21 @@ public class CarAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View layoutItem;
 
-        layoutItem = view == null ? inflater.inflate(R.layout.car_item, viewGroup, false) : view;
-        Animation anim = AnimationUtils.loadAnimation(listener.getContext(), R.anim.right_to_left);
+        layoutItem = view == null ? inflater.inflate(R.layout.purchase_item, viewGroup, false) : view;
+        Animation anim = AnimationUtils.loadAnimation(listener.getApplicationContext(), R.anim.right_to_left);
         anim.setDuration(anim.getDuration()+(i* 30L));
         layoutItem.startAnimation(anim);
 
-        TextView carBrand = layoutItem.findViewById(R.id.product_brand);
-        ListCar.getInstance();
-        carBrand.setText(ListCar.getInstance().get(i).getMarque());
-        carBrand.setTypeface(Typeface.DEFAULT_BOLD);
+        TextView carName = layoutItem.findViewById(R.id.purchase_product_name);
+        carName.setText(this.purchaseList.get(i).getMarque()+" "+this.purchaseList.get(i).getCarName());
+        carName.setTypeface(Typeface.DEFAULT_BOLD);
         ImageView imageView = layoutItem.findViewById(R.id.product_image);
         new Thread(()->{
             try {
                 synchronized (synchro){
-
-                    this.carBitmap = BitmapFactory.decodeStream((InputStream)new URL(ListCar.getInstance().get(i).getImage()).getContent());
+                    System.out.println("Chargement de l'image...");
+                    this.carBitmap = BitmapFactory.decodeStream((InputStream)new URL(ListCar.getInstance().get(purchaseList.get(i).getId()).getImage()).getContent());
+                    System.out.println("Image chargée");
                     synchro.notify();
                 }
             } catch (IOException e) {
@@ -78,6 +81,7 @@ public class CarAdapter extends BaseAdapter {
         }).start();
         synchronized (synchro){
             try {
+                System.out.println("Attente de l'image...");
                 synchro.wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -85,14 +89,14 @@ public class CarAdapter extends BaseAdapter {
             imageView.setImageBitmap(this.carBitmap);
         }
 
-
-        TextView carName = layoutItem.findViewById(R.id.product_name);
-        carName.setText(ListCar.getInstance().get(i).getName());
-
         TextView carPrice = layoutItem.findViewById(R.id.product_price);
-        carPrice.setText(String.format("%.2f€",ListCar.getInstance().get(i).getPrice()));
+        carPrice.setText(String.format("%.2f€",this.purchaseList.get(i).getPrice()));
 
-        layoutItem.setOnClickListener(c -> listener.onClickProduct(ListCar.getInstance().get(i)));
+        TextView deliveryDate = layoutItem.findViewById(R.id.delivery_date);
+        deliveryDate.setText(this.purchaseList.get(i).getDeliveryDate());
+
+        TextView deliveryPlace = layoutItem.findViewById(R.id.delivery_place);
+        deliveryPlace.setText(this.purchaseList.get(i).getDeliveryPlace());
 
         return layoutItem;
     }

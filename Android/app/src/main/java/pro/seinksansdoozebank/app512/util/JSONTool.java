@@ -55,7 +55,6 @@ public class JSONTool {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 sb.append(line);
-                System.out.println(line);
             }
         } catch (IOException fileNotFound) {
             throw new RuntimeException(fileNotFound);
@@ -67,7 +66,6 @@ public class JSONTool {
             for (int i = 0; i < arr.length(); i++)
             {
                 String name = arr.getJSONObject(i).getString("name");
-                System.out.println(name);
             }
             return obj;
         } catch (JSONException fileNotFound) {

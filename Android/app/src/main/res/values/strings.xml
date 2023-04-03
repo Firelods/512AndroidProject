@@ -27,4 +27,7 @@
     <string name="cb">Numéro de carte bancaire</string>
     <string name="date_expiration">Date d\'expiration</string>
     <string name="cvv">CVV</string>
+    <string name="purchases_title">Mes achats</string>
+    <string name="purchase_date">date</string>
+    <string name="delivery_place">ville</string>
 </resources>

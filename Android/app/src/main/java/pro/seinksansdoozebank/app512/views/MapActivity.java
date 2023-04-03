@@ -134,11 +134,8 @@ public class MapActivity extends AppCompatActivity {
         buyButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, PaymentActivity.class);
             intent.putExtra("carId", carId);
-            System.out.println("CAR ID : " + carId);
             intent.putExtra("latitude", this.coordinates.get(0).get(0));
-            System.out.println("LATITUDE : " + this.coordinates.get(0).get(0));
             intent.putExtra("longitude", this.coordinates.get(0).get(1));
-            System.out.println("LONGITUDE : " + this.coordinates.get(0).get(1));
             startActivity(intent);
         });
     }
