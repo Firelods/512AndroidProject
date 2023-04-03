@@ -1,9 +1,12 @@
 package pro.seinksansdoozebank.app512.util;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import pro.seinksansdoozebank.app512.R;
@@ -25,21 +29,23 @@ import pro.seinksansdoozebank.app512.model.ListCar;
 import pro.seinksansdoozebank.app512.model.Purchase;
 
 public class PurchaseAdapter extends BaseAdapter {
-    private final List<Purchase> purchaseList;
+    private final ArrayList<Purchase> purchaseList;
     private LayoutInflater inflater;
     private AppCompatActivity listener;
     private Bitmap carBitmap;
 
     private final Object synchro = new Object();
 
-    public PurchaseAdapter(AppCompatActivity activity, List<Purchase> purchases) {
+    public PurchaseAdapter(AppCompatActivity activity, ArrayList<Purchase> purchases) {
         this.inflater = LayoutInflater.from(activity.getApplicationContext());
         this.listener = activity;
         this.purchaseList = purchases;
+        Log.e(TAG, "PurchaseAdapter: "+purchases  );
     }
 
     @Override
     public int getCount() {
+        Log.e(TAG, "getCount: "+purchaseList.size() );
         return purchaseList.size();
     }
 
@@ -89,7 +95,7 @@ public class PurchaseAdapter extends BaseAdapter {
             imageView.setImageBitmap(this.carBitmap);
         }
 
-        TextView carPrice = layoutItem.findViewById(R.id.product_price);
+        TextView carPrice = layoutItem.findViewById(R.id.product_price1);
         carPrice.setText(String.format("%.2f€",this.purchaseList.get(i).getPrice()));
 
         TextView deliveryDate = layoutItem.findViewById(R.id.delivery_date);
@@ -97,7 +103,6 @@ public class PurchaseAdapter extends BaseAdapter {
 
         TextView deliveryPlace = layoutItem.findViewById(R.id.delivery_place);
         deliveryPlace.setText(this.purchaseList.get(i).getDeliveryPlace());
-
         return layoutItem;
     }
 }

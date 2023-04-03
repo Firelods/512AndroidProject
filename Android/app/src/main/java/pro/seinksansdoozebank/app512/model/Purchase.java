@@ -8,17 +8,9 @@ public class Purchase {
     private String name;
     private String lastName;
     private String date;
-    private double latitude;
-    private double longitude;
+    private String adresse;
 
-    public Purchase(int carId, String name, String lastName, String date, double latitude, double longitude) {
-        this.carId = carId;
-        this.name = name;
-        this.lastName = lastName;
-        this.date = date;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+
 
     public Purchase(JSONObject obj) {
         try {
@@ -26,8 +18,7 @@ public class Purchase {
             this.name = obj.getString("name");
             this.lastName = obj.getString("lastName");
             this.date = obj.getString("date");
-            this.latitude = obj.getDouble("latitude");
-            this.longitude = obj.getDouble("longitude");
+            this.adresse = obj.getString("adresse");
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -51,7 +42,7 @@ public class Purchase {
     }
 
     public String getDeliveryPlace() {
-        return "Lat: " + latitude + " Long: " + longitude;
+        return adresse;
     }
 
     public int getId() {

@@ -91,8 +91,6 @@ public class MapActivity extends AppCompatActivity {
         ONCLICK LISTENER
          */
         rechercher.setOnClickListener(e->{
-            //TODO trouver pq c'est lent parfois (ca fait crash)
-            //TODO faire ne sorte que la touche Entrée face la recherche (par de l'async pcq la tout est bloqué
             final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
@@ -134,8 +132,7 @@ public class MapActivity extends AppCompatActivity {
         buyButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, PaymentActivity.class);
             intent.putExtra("carId", carId);
-            intent.putExtra("latitude", this.coordinates.get(0).get(0));
-            intent.putExtra("longitude", this.coordinates.get(0).get(1));
+            intent.putExtra("address", this.address.getText().toString());
             startActivity(intent);
         });
     }

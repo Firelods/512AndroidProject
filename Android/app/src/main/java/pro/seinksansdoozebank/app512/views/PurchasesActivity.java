@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Adapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -44,7 +45,7 @@ public class PurchasesActivity extends AppCompatActivity {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-        List<Purchase> purchases = new ArrayList<>();
+        ArrayList<Purchase> purchases = new ArrayList<>();
         for (int i = 0; i < arr.length(); i++) {
             try {
                 purchases.add(new Purchase(arr.getJSONObject(i)));
@@ -54,7 +55,9 @@ public class PurchasesActivity extends AppCompatActivity {
             }
         }
         ListView listView = findViewById(R.id.purchase_list);
-        listView.setAdapter(new PurchaseAdapter(this, purchases));
+        PurchaseAdapter adapter = new PurchaseAdapter(this, purchases);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 

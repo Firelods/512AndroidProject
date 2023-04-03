@@ -51,8 +51,7 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment);
         ImageButton backButton = findViewById(R.id.back_button);
         int carId = getIntent().getIntExtra("carId", -1);
-        double latitude = getIntent().getDoubleExtra("latitude", -1);
-        double longitude = getIntent().getDoubleExtra("longitude", -1);
+        String adresse = getIntent().getStringExtra("adresse");
         backButton.setOnClickListener(v -> finish());
         Button buyButton = findViewById(R.id.buy_button);
         EditText firstName = findViewById(R.id.firstName);
@@ -64,7 +63,7 @@ public class PaymentActivity extends AppCompatActivity {
         dateButton.setOnClickListener(v -> datePickerDialog.show());
 
         buyButton.setOnClickListener(v -> {
-            if(JSONTool.savePurchaseToJSON("purchases.json", this.getApplicationContext(), carId, String.valueOf(firstName.getText()), String.valueOf(lastName.getText()), String.valueOf(dateButton.getText()), latitude, longitude)){
+            if(JSONTool.savePurchaseToJSON("purchases.json", this.getApplicationContext(), carId, String.valueOf(firstName.getText()), String.valueOf(lastName.getText()), String.valueOf(dateButton.getText()),adresse)){
                 sendConfirmationNotification();
                 //TODO rajouter la page de confirmation de paiement
                 Intent intent = new Intent(this, MainActivity.class);

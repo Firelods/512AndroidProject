@@ -17,6 +17,7 @@ import pro.seinksansdoozebank.app512.model.ListCar;
 import pro.seinksansdoozebank.app512.util.CarAdapter;
 import pro.seinksansdoozebank.app512.model.Car;
 import pro.seinksansdoozebank.app512.util.CarAdapterListener;
+import pro.seinksansdoozebank.app512.util.JSONTool;
 
 public class MainActivity extends AppCompatActivity implements CarAdapterListener {
 
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
                 }
             }
         }
+        JSONTool.savePurchaseToJSON("purchases.json", this.getApplicationContext(), 4, "Clément", "lefevre", "15-09-2022", "34 avenue saint augustin Nice");
+
         createNotificationChannel();
         ImageButton button = findViewById(R.id.purchases_button);
         button.setOnClickListener(v -> {
