@@ -27,14 +27,18 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListCar.getInstance();
-        synchronized (sync) {
-            try {
-                Log.d("MainActivity", "Waiting for sync");
-                sync.wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+        if(!ListCar.isLoad())
+        {
+            synchronized (sync) {
+                try {
+                    Log.d("MainActivity", "Waiting for sync");
+                    sync.wait();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
+
         createNotificationChannel();
         ImageButton button = findViewById(R.id.purchases_button);
         ListView listView = findViewById(R.id.car_list);

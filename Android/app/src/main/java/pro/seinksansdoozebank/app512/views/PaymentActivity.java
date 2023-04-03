@@ -30,6 +30,7 @@ public class PaymentActivity extends AppCompatActivity {
         backButton.setOnClickListener(v -> finish());
         Button buyButton = findViewById(R.id.buy_button);
         buyButton.setOnClickListener(v -> {
+
             sendConfirmationNotification();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);

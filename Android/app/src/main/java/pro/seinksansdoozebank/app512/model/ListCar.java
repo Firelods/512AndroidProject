@@ -30,6 +30,8 @@ public class ListCar extends ArrayList<Car> {
      */
     private static ListCar instance;
 
+    private boolean alreadyLoad = false;
+
 
 
 
@@ -42,9 +44,14 @@ public class ListCar extends ArrayList<Car> {
         if (instance == null) {
             instance = new ListCar();
         }
+
+
         return instance;
     }
-
+    public static boolean isLoad()
+    {
+        return instance.alreadyLoad;
+    }
     /**
      * Constructeur de la liste des voitures en faisant une requête à l'API
      */
@@ -96,6 +103,7 @@ public class ListCar extends ArrayList<Car> {
                         }
                        synchronized (MainActivity.sync) {
                            MainActivity.sync.notify();
+                           alreadyLoad = true;
                            System.out.println("notify");
                        }
                  }
