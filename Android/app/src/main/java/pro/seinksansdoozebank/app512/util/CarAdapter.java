@@ -59,7 +59,6 @@ public class CarAdapter extends BaseAdapter {
         carBrand.setText(ListCar.getInstance().get(i).getMarque());
         carBrand.setTypeface(Typeface.DEFAULT_BOLD);
         ImageView imageView = layoutItem.findViewById(R.id.product_image);
-        //FIXME imageView.setImageResource(ListCar.getInstance().get(i).getImage());
         new Thread(()->{
             try {
                 synchronized (synchro){
