@@ -92,7 +92,7 @@ public class MapActivity extends AppCompatActivity {
          */
         rechercher.setOnClickListener(e->{
             //TODO trouver pq c'est lent parfois (ca fait crash)
-            //TODO faire ne sorte que la touche Entrée face la recherche
+            //TODO faire ne sorte que la touche Entrée face la recherche (par de l'async pcq la tout est bloqué
             final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 

@@ -40,6 +40,7 @@ import java.io.Writer;
 import java.util.Date;
 
 import pro.seinksansdoozebank.app512.R;
+import pro.seinksansdoozebank.app512.util.JSONTool;
 
 public class PaymentActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
@@ -63,7 +64,7 @@ public class PaymentActivity extends AppCompatActivity {
         dateButton.setOnClickListener(v -> datePickerDialog.show());
 
         buyButton.setOnClickListener(v -> {
-            if(savePurchaseToJSON(carId, String.valueOf(firstName.getText()), String.valueOf(lastName.getText()), String.valueOf(dateButton.getText()), latitude, longitude)){
+            if(JSONTool.savePurchaseToJSON("purchases.json", this.getApplicationContext(), carId, String.valueOf(firstName.getText()), String.valueOf(lastName.getText()), String.valueOf(dateButton.getText()), latitude, longitude)){
                 sendConfirmationNotification();
                 //TODO rajouter la page de confirmation de paiement
                 Intent intent = new Intent(this, MainActivity.class);
@@ -73,37 +74,6 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
 
-
-    private boolean savePurchaseToJSON(int carId, String name, String lastName, String date, double latitude, double longitude) {
-        JSONObject root = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("carId", carId);
-            jsonObject.put("name", name);
-            jsonObject.put("lastName", lastName);
-            jsonObject.put("date", date);
-            jsonObject.put("latitude", latitude);
-            jsonObject.put("longitude", longitude);
-            jsonArray.put(jsonObject);
-            root.put("purchases", jsonArray);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-        String FILENAME = "purchases.json";
-        String jsonString = root.toString();
-        try {
-            FileOutputStream fos = this.getApplicationContext().openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            if (jsonString != null) {
-                fos.write(jsonString.getBytes());
-            }
-            fos.close();
-            return true;
-        } catch (IOException fileNotFound) {
-            return false;
-        }
-
-    }
 
     private void sendConfirmationNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.channel_id))
