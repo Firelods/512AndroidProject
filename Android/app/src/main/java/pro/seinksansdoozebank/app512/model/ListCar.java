@@ -53,7 +53,7 @@ public class ListCar extends ArrayList<Car> {
         super();
         new Thread(() -> {
             try {
-                URL url = new URL("http://64.225.109.223:8083/allItems");
+                URL url = new URL("http://64.225.109.223:443/allItems"); // Port 80 already used
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("Content-Type", "application/json; utf-8");
