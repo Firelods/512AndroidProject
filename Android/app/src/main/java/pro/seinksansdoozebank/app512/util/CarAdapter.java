@@ -8,6 +8,8 @@ import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,7 +54,11 @@ public class CarAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View layoutItem;
+
         layoutItem = view == null ? inflater.inflate(R.layout.car_item, viewGroup, false) : view;
+        Animation anim = AnimationUtils.loadAnimation(listener.getContext(), R.anim.right_to_left);
+        anim.setDuration(anim.getDuration()+(i* 100L));
+        layoutItem.startAnimation(anim);
 
         TextView carBrand = layoutItem.findViewById(R.id.product_brand);
         ListCar.getInstance();
