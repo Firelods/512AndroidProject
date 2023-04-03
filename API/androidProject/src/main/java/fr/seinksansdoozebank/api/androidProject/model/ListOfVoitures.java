@@ -38,6 +38,7 @@ public class ListOfVoitures extends ArrayList<Voiture> {
         add(new Voiture(17,"Carrera","Porsche",75412.66,"https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Porsche_Carrera_GT_-_Goodwood_Breakfast_Club_%28July_2008%29.jpg/1024px-Porsche_Carrera_GT_-_Goodwood_Breakfast_Club_%28July_2008%29.jpg","Voiture petite, sportive et elegante avec un look aggressif et un moteur V6 de 3.0L, 400ch et 500nm de couple"));
         add(new Voiture(18,"911","Porsche",41231.32,"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/DSC06513-Porsche_911_Speedster_Concept_Mondial_Paris_2018.jpg/1024px-DSC06513-Porsche_911_Speedster_Concept_Mondial_Paris_2018.jpg","Voiture embleme de Porsche qui reflete le savoir faire de la marque"));
 
+
     }
     public String getListInString() {
         ObjectMapper mapper = new ObjectMapper();
