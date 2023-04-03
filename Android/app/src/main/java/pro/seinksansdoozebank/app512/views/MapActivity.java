@@ -51,7 +51,7 @@ public class MapActivity extends AppCompatActivity {
     private MapView map;
     private IMapController mapController;
 
-    private Object waiter;
+    private final Object waiter = new Object();
 
 
     private final String api_free_key = "46c2f2b1018e200de3b74d95f0006e5c";
@@ -85,12 +85,14 @@ public class MapActivity extends AppCompatActivity {
         mapController.setZoom(4.0);
         mapController.setCenter(startPoint);
         this.points = new ArrayList<>();
-        waiter = new Object();
+
 
         /*
         ONCLICK LISTENER
          */
         rechercher.setOnClickListener(e->{
+            //TODO trouver pq c'est lent parfois (ca fait crash)
+            //TODO faire ne sorte que la touche Entrée face la recherche
             final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
@@ -153,7 +155,7 @@ public class MapActivity extends AppCompatActivity {
         }
 
         ItemizedOverlayWithFocus<OverlayItem> mOverlay =
-                new ItemizedOverlayWithFocus<OverlayItem>(getApplicationContext(), this.points, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                new ItemizedOverlayWithFocus<>(getApplicationContext(), this.points, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     @Override
                     public boolean onItemSingleTapUp(int index, OverlayItem item) {
                         /*

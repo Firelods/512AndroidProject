@@ -50,8 +50,8 @@ public class PaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment);
         ImageButton backButton = findViewById(R.id.back_button);
         int carId = getIntent().getIntExtra("carId", -1);
-        int latitude = getIntent().getIntExtra("latitude", -1);
-        int longitude = getIntent().getIntExtra("longitude", -1);
+        double latitude = getIntent().getDoubleExtra("latitude", -1);
+        double longitude = getIntent().getDoubleExtra("longitude", -1);
         backButton.setOnClickListener(v -> finish());
         Button buyButton = findViewById(R.id.buy_button);
         EditText firstName = findViewById(R.id.firstName);
@@ -99,9 +99,7 @@ public class PaymentActivity extends AppCompatActivity {
             }
             fos.close();
             return true;
-        } catch (FileNotFoundException fileNotFound) {
-            return false;
-        } catch (IOException ioException) {
+        } catch (IOException fileNotFound) {
             return false;
         }
 
