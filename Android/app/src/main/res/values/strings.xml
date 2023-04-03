@@ -21,4 +21,10 @@
 
     <string name="saisir_l_adresse_de_livraison">Saisir l\'adresse de livraison</string>
     <string name="rechercher">Rechercher</string>
+    <string name="prenom">Prénom</string>
+    <string name="nom">Nom</string>
+    <string name="date_livraison">Date de livraison</string>
+    <string name="cb">Numéro de carte bancaire</string>
+    <string name="date_expiration">Date d\'expiration</string>
+    <string name="cvv">CVV</string>
 </resources>
