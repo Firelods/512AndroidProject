@@ -73,6 +73,7 @@
                 android:textSize="25sp" />
 
             <EditText
+                android:id="@+id/firstName"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:textColor="@color/black"
@@ -89,6 +90,7 @@
                 android:textSize="25sp" />
 
             <EditText
+                android:id="@+id/lastName"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:textColor="@color/black"
@@ -125,6 +127,7 @@
                 />
 
             <EditText
+                android:id="@+id/cardNumber"
                 android:layout_width="300dp"
                 android:textColor="@color/black"
 
@@ -141,6 +144,7 @@
                 android:textSize="25sp" />
 
             <EditText
+                android:id="@+id/cvv"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:textColor="@color/black"
@@ -156,6 +160,7 @@
                 android:textSize="25sp" />
 
             <EditText
+                android:id="@+id/expirationDate"
                 android:layout_width="300dp"
                 android:paddingHorizontal="20dp"
                 android:layout_height="40dp"
