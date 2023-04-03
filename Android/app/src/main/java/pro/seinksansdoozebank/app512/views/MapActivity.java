@@ -1,14 +1,15 @@
 package pro.seinksansdoozebank.app512.views;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,17 +30,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+
 import android.widget.ImageButton;
 
 import pro.seinksansdoozebank.app512.R;
-import pro.seinksansdoozebank.app512.model.Car;
 
 public class MapActivity extends AppCompatActivity {
     private EditText address;
@@ -69,8 +67,11 @@ public class MapActivity extends AppCompatActivity {
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(v -> finish());
         this.coordinates = new ArrayList<>();
+
+
+
         buyButton = findViewById(R.id.valid_place_button);
-        buyButton.setEnabled(false);
+        buyButton.setVisibility(View.INVISIBLE);
         this.address = findViewById(R.id.address);
         Button rechercher = findViewById(R.id.research);
 
@@ -106,12 +107,15 @@ public class MapActivity extends AppCompatActivity {
                 if(this.points.size()>0)
                 {
                     map.getController().animateTo(new GeoPoint(this.coordinates.get(0).get(0), this.coordinates.get(0).get(1)));
-                    map.getController().setZoom(17.0);
+                    map.getController().setZoom(13.0);
                 }
                 else{
                     map.getController().setCenter(startPoint);
                     map.getController().setZoom(4.0);
-                    buyButton.setEnabled(false);
+                    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
+                    buyButton.setAnimation(anim);
+                    buyButton.setVisibility(View.INVISIBLE);
+
                     Toast toast = Toast.makeText(getApplicationContext(), "Adresse Invalide", Toast.LENGTH_SHORT);
                     toast.show();
 
@@ -142,8 +146,12 @@ public class MapActivity extends AppCompatActivity {
                 new ItemizedOverlayWithFocus<OverlayItem>(getApplicationContext(), this.points, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     @Override
                     public boolean onItemSingleTapUp(int index, OverlayItem item) {
-
-                        buyButton.setEnabled(true);
+                        /*
+                        ANIMATION
+                         */
+                        Animation anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+                        buyButton.setAnimation(anim);
+                        buyButton.setVisibility(View.VISIBLE);
                         return true;
                     }
 

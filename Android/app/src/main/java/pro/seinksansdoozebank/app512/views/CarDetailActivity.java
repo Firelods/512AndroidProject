@@ -22,9 +22,9 @@ import pro.seinksansdoozebank.app512.model.ListCar;
 
 public class CarDetailActivity extends AppCompatActivity {
 
-    Bitmap carBitmap;
-    final Object synchro = new Object();
-    Car car;
+    private Bitmap carBitmap;
+    private final Object synchro = new Object();
+    private Car car;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
