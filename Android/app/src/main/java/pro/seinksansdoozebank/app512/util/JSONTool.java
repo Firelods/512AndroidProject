@@ -16,8 +16,8 @@ import java.io.InputStreamReader;
 public class JSONTool {
 
     public static boolean savePurchaseToJSON(String fileName, Context context, int carId, String name, String lastName, String date, double latitude, double longitude) {
-        JSONObject root = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
+        JSONObject root = JSONTool.readJSON(context, fileName);
+        JSONArray jsonArray = root.optJSONArray("purchases");
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("carId", carId);
@@ -26,6 +26,7 @@ public class JSONTool {
             jsonObject.put("date", date);
             jsonObject.put("latitude", latitude);
             jsonObject.put("longitude", longitude);
+            assert jsonArray != null;
             jsonArray.put(jsonObject);
             root.put("purchases", jsonArray);
         } catch (JSONException e) {
@@ -56,10 +57,8 @@ public class JSONTool {
                 sb.append(line);
                 System.out.println(line);
             }
-        } catch (FileNotFoundException fileNotFound) {
+        } catch (IOException fileNotFound) {
             throw new RuntimeException(fileNotFound);
-        } catch (IOException ioException) {
-            throw new RuntimeException(ioException);
         }
 
         try {
