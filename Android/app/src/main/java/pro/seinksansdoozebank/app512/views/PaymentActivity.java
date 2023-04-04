@@ -140,7 +140,7 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
 
-    private void checkPayment()
+    private void paymentValidate()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Paiement");
@@ -153,4 +153,5 @@ public class PaymentActivity extends AppCompatActivity {
 
         builder.show();
     }
+    
 }
