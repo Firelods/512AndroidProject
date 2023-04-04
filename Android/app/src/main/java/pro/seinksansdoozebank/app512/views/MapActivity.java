@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import android.widget.ImageButton;
 
 import pro.seinksansdoozebank.app512.R;
+import pro.seinksansdoozebank.app512.util.ToolBarFragment;
 
 public class MapActivity extends AppCompatActivity {
     private EditText address;
@@ -69,11 +70,11 @@ public class MapActivity extends AppCompatActivity {
         INITIALISATION
          */
         int carId = getIntent().getIntExtra("carId", 0);
-        ImageButton backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(v -> finish());
+
+        ToolBarFragment toolBarFragment = new ToolBarFragment(v->finish(),getString(R.string.map_activity_title),28);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,toolBarFragment).commit();
+
         this.coordinates = new ArrayList<>();
-
-
 
         buyButton = findViewById(R.id.valid_place_button);
         buyButton.setVisibility(View.INVISIBLE);

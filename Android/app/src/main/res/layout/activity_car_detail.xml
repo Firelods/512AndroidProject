@@ -8,46 +8,11 @@
     android:orientation="vertical"
     tools:context=".views.CarDetailActivity">
 
-    <Toolbar
-        android:id="@+id/my_toolbar"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/blue"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="start">
-
-            <ImageButton
-                android:id="@+id/back_button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="15dp"
-                android:background="@drawable/back_arrow"
-                android:backgroundTint="@color/white"
-                android:contentDescription="@string/back_arrow_description"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@string/product_name"
-                android:textColor="@color/white"
-                android:textSize="36sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/back_button"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </Toolbar>
+        android:layout_height="wrap_content"
+        android:name="pro.seinksansdoozebank.app512.util.ToolBarFragment"/>
 
 
     <LinearLayout

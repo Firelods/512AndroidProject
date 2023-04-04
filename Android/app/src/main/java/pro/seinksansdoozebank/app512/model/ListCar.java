@@ -106,7 +106,6 @@ public class ListCar extends ArrayList<Car> {
                        synchronized (MainActivity.sync) {
                            MainActivity.sync.notify();
                            alreadyLoad = true;
-                           System.out.println("notify");
                        }
                  }
 

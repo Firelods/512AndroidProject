@@ -74,9 +74,7 @@ public class PurchaseAdapter extends BaseAdapter {
         new Thread(()->{
             try {
                 synchronized (synchro){
-                    System.out.println("Chargement de l'image...");
                     this.carBitmap = BitmapFactory.decodeStream((InputStream)new URL(ListCar.getInstance().get(purchaseList.get(i).getId()).getImage()).getContent());
-                    System.out.println("Image chargée");
                     synchro.notify();
                 }
             } catch (IOException e) {
@@ -85,7 +83,6 @@ public class PurchaseAdapter extends BaseAdapter {
         }).start();
         synchronized (synchro){
             try {
-                System.out.println("Attente de l'image...");
                 synchro.wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

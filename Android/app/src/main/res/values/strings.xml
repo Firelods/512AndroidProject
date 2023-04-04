@@ -8,9 +8,7 @@
     <string name="product_brand">Brand</string>
     <string name="buy_button_text">Commander</string>
     <string name="back_arrow_description">An arrow allowing to return to the previous screen</string>
-    <string name="map_title">Lieu de livraison</string>
     <string name="confirm_place_button">Valider</string>
-    <string name="payment_title">Paiement</string>
     <string name="channel_name">512Cars</string>
     <string name="channel_description">Notification channel used by 512Cars</string>
     <string name="channel_id">512Cars</string>
@@ -27,7 +25,12 @@
     <string name="cb">Numéro de carte bancaire</string>
     <string name="date_expiration">Date d\'expiration</string>
     <string name="cvv">CVV</string>
-    <string name="purchases_title">Mes achats</string>
     <string name="purchase_date">date</string>
     <string name="delivery_place">ville</string>
+    <string name="toolBarTitle">ToolBarTitle</string>
+    <string name="detail_activity_title">Détails de la voiture</string>
+    <string name="map_activity_title">Choix du lieu de livraison</string>
+    <string name="payment_activity_title">Paiement</string>
+    <string name="purchases_activity_title">Mes achats</string>
+
 </resources>

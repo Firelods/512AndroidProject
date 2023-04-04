@@ -41,6 +41,7 @@ import java.util.Date;
 
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.util.JSONTool;
+import pro.seinksansdoozebank.app512.util.ToolBarFragment;
 
 public class PaymentActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
@@ -49,10 +50,13 @@ public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
-        ImageButton backButton = findViewById(R.id.back_button);
+
+        ToolBarFragment toolBarFragment = new ToolBarFragment(v->finish(),getString(R.string.payment_activity_title),32);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,toolBarFragment).commit();
+
+
         int carId = getIntent().getIntExtra("carId", -1);
         String adresse = getIntent().getStringExtra("adresse");
-        backButton.setOnClickListener(v -> finish());
         Button buyButton = findViewById(R.id.buy_button);
         EditText firstName = findViewById(R.id.firstName);
         EditText lastName = findViewById(R.id.lastName);
