@@ -46,7 +46,6 @@ import pro.seinksansdoozebank.app512.util.JSONTool;
 public class PaymentActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
-
     private EditText firstName;
     private EditText cardNumber;
     private EditText cvv;
@@ -76,14 +75,13 @@ public class PaymentActivity extends AppCompatActivity {
         buyButton.setOnClickListener(v -> {
             if (JSONTool.savePurchaseToJSON("purchases.json", this.getApplicationContext(), carId, String.valueOf(firstName.getText()), String.valueOf(lastName.getText()), String.valueOf(dateButton.getText()), adresse)) {
                 checkPayement();
-
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
             }
         });
     }
 
-
+    /**
+     * Fontion qui envoie une notification de confirmation de commande
+     */
     private void sendConfirmationNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), getString(R.string.channel_id))
                 .setSmallIcon(R.drawable.car)
@@ -99,7 +97,11 @@ public class PaymentActivity extends AppCompatActivity {
         notificationManager.notify(1, builder.build());
     }
 
-
+    /**
+     * Reinitialise le DatePicker à la date du jour
+     *
+     * @return La date du jour
+     */
     private String getTodaysDate() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -109,6 +111,9 @@ public class PaymentActivity extends AppCompatActivity {
         return makeDateString(day, month, year);
     }
 
+    /**
+     * Initialise le DatePicker à la date du jour
+     */
     private void initDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -127,31 +132,43 @@ public class PaymentActivity extends AppCompatActivity {
 
         datePickerDialog = new DatePickerDialog(this, dateSetListener, year, month, day);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-
     }
 
+    /**
+     * Fonction qui transforme la date en format String
+     *
+     * @param day   Jour
+     * @param month Mois
+     * @param year  Année
+     * @return La date en format String
+     */
     private String makeDateString(int day, int month, int year) {
-        return getMonthFormat(month) + " " + day + " " + year;
+        return day + " " + getMonthFormat(month) + " " + year;
     }
 
+    /**
+     * Fonction qui transforme le mois en format String
+     *
+     * @param month Mois
+     * @return Le mois en format String
+     */
     private String getMonthFormat(int month) {
         if (month == 1)
             return "JAN";
         if (month == 2)
-            return "FEB";
+            return "FEV";
         if (month == 3)
             return "MAR";
         if (month == 4)
-            return "APR";
+            return "AVR";
         if (month == 5)
-            return "MAY";
+            return "MAI";
         if (month == 6)
-            return "JUN";
+            return "JUIN";
         if (month == 7)
             return "JUL";
         if (month == 8)
-            return "AUG";
+            return "AOUT";
         if (month == 9)
             return "SEP";
         if (month == 10)
@@ -160,31 +177,34 @@ public class PaymentActivity extends AppCompatActivity {
             return "NOV";
         if (month == 12)
             return "DEC";
-
-        //default should never happen
         return "JAN";
     }
 
+    /**
+     * Fonction qui vérifie si les informations de paiement sont valides
+     */
     private void checkPayement() {
         boolean cardNumberValid = cardNumber.getText().toString().matches("^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$");
-        boolean firstNameValid=firstName.getText().toString().matches("^[a-zA-Z]+$");
-        boolean lastNameValid=lastName.getText().toString().matches("^[a-zA-Z]+$");
-        boolean cvvValid=cvv.getText().toString().matches("^[0-9]{3}$");
-        boolean dateValid=dateExpiration.getText().toString().matches("^(0[1-9]|1[0-2])\\/([0-9]{2})$");
+        boolean firstNameValid = firstName.getText().toString().matches("^[a-zA-Z]+$");
+        boolean lastNameValid = lastName.getText().toString().matches("^[a-zA-Z]+$");
+        boolean cvvValid = cvv.getText().toString().matches("^[0-9]{3}$");
+        boolean dateValid = dateExpiration.getText().toString().matches("^(0[1-9]|1[0-2])\\/([0-9]{2})$");
         if (cardNumberValid
                 && firstNameValid
                 && lastNameValid
                 && cvvValid
                 && dateValid
-        ) {
+        ) { // Si toutes les informations sont valides
             paymentValidate();
 
-        } else {
-
+        } else { // Si une ou plusieurs informations sont invalides
             paymentRefuse(cardNumberValid, firstNameValid, lastNameValid, cvvValid, dateValid);
         }
     }
 
+    /**
+     * Fonction qui affiche une boite de dialogue de confirmation de paiement et qui renvoie vers la mainActivity après validation
+     */
     private void paymentValidate() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Paiement");
@@ -199,9 +219,15 @@ public class PaymentActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Fonction qui affiche une boite de dialogue d'erreur de paiement
+     * @param cardValid    Numéro de carte valide
+     * @param firstNameValid    Prénom valide
+     * @param lastNameValid Nom valide
+     * @param cvvValid CVV valide
+     * @param dateValid Date valide
+     */
     private void paymentRefuse(boolean cardValid, boolean firstNameValid, boolean lastNameValid, boolean cvvValid, boolean dateValid) {
-//        Toast.makeText(getApplicationContext(), cardValid==false, Toast.LENGTH_LONG).show();
-        // send a toast message with all the errors when present
         String message = "";
         if (!cardValid) {
             message += "Numéro de carte invalide\n";
@@ -219,7 +245,5 @@ public class PaymentActivity extends AppCompatActivity {
             message += "Date invalide";
         }
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-
     }
-
 }
