@@ -69,7 +69,10 @@ public class CarAdapter extends BaseAdapter {
         ImageView imageView = layoutItem.findViewById(R.id.product_image);
         Picasso.get().load(ListCar.getInstance().get(i).getImage()).into(imageView);
 
-
+        imageView.setOnClickListener(c ->
+        {
+            listener.onClickImage(ListCar.getInstance().get(i));
+        });
 
         TextView carName = layoutItem.findViewById(R.id.product_name);
         carName.setText(ListCar.getInstance().get(i).getName());

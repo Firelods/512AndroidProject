@@ -1,7 +1,9 @@
 package pro.seinksansdoozebank.app512.views;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -9,8 +11,17 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+
+import com.squareup.picasso.Picasso;
 
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.model.ListCar;
@@ -56,6 +67,22 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         Intent intent = new Intent(this, CarDetailActivity.class);
         intent.putExtra("carId", item.getID());
         startActivity(intent);
+    }
+
+    @SuppressLint({"InflateParams", "ResourceType"})
+    @Override
+    public void onClickImage(Car item) {
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.image_pop_up, null);
+        ImageView imageView = popupView.findViewById(R.id.bigger_image);
+        Picasso.get().load(item.getImage()).into(imageView);
+
+        PopupWindow popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+
+        popupView.setOnClickListener(v -> popupWindow.dismiss());
+
     }
 
     @Override
