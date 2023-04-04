@@ -1,6 +1,7 @@
 package fr.seinksansdoozebank.api.androidProject;
 
 
+import fr.seinksansdoozebank.api.androidProject.model.Achat;
 import fr.seinksansdoozebank.api.androidProject.model.ListOfVoitures;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,8 +10,10 @@ import java.util.ArrayList;
 @RestController
 public class APIController {
 
+    private ArrayList<Achat> listeAchat=new ArrayList<>();
+    private ListOfVoitures listOfVoitures;
 
-    ListOfVoitures listOfVoitures;
+
 
 
     /**
@@ -35,6 +38,17 @@ public class APIController {
     {
         listOfVoitures = ListOfVoitures.getInstance();
         return listOfVoitures.getId(id);
+    }
+    @PostMapping("/ajouter")
+    public boolean ajouterItem(@RequestBody Achat item)
+    {
+        this.listeAchat.add(item);
+        return true;
+    }
+    @GetMapping("/display")
+    public ArrayList<Achat> displayPanier()
+    {
+        return this.listeAchat;
     }
 
 
