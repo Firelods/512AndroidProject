@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.MainActivity"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:background="@color/white">
+    tools:context=".views.MainActivity">
 
     <Toolbar
         android:id="@+id/my_toolbar"
@@ -34,8 +34,8 @@
 
             <ImageButton
                 android:id="@+id/purchases_button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/shopping_cart"
                 android:backgroundTint="@color/white"
@@ -50,8 +50,7 @@
         android:id="@+id/car_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="30dp"
         android:layout_marginTop="10dp"
-        />
+        android:dividerHeight="30dp" />
 
 </LinearLayout>
