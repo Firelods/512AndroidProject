@@ -25,8 +25,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.json.JSONArray;
@@ -52,6 +60,10 @@ public class PaymentActivity extends AppCompatActivity {
     private EditText cvv;
     private EditText dateExpiration;
     private EditText lastName;
+    private int responseCode;
+    private InputStream inputStream;
+    private String adresse;
+    private int carId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +74,8 @@ public class PaymentActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,toolBarFragment).commit();
 
 
-        int carId = getIntent().getIntExtra("carId", -1);
-        String adresse = getIntent().getStringExtra("adresse");
+        carId = getIntent().getIntExtra("carId", -1);
+        adresse = getIntent().getStringExtra("adresse");
         Button buyButton = findViewById(R.id.buy_button);
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -214,6 +226,34 @@ public class PaymentActivity extends AppCompatActivity {
         builder.setTitle("Paiement");
         builder.setMessage("Paiement accepté");
         sendConfirmationNotification();
+        new Thread(() -> {
+            try {
+                URL url = new URL("http://64.225.109.223:443/ajouter");// TODO : URL du POST de l'API
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json; utf-8");
+                connection.setRequestProperty("Accept", "application/json");
+                // send the post body with carId", c
+                //name"
+                //lastName"
+                //date"
+                //adresse"
+
+                connection.setDoOutput(true);
+                String jsonInputString = "{\"carID\": \"" + carId + "\", \"prenom\": \"" + firstName.getText().toString() + "\", \"nom\": \"" + lastName.getText().toString() + "\", \"date\": \"" + dateButton.getText().toString() + "\", \"adresse\": \"" + adresse + "\"}";
+                try (OutputStream os = connection.getOutputStream()) {
+                    byte[] input = jsonInputString.getBytes("utf-8");
+                    os.write(input, 0, input.length);
+                }
+
+                responseCode = connection.getResponseCode();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
 
         builder.setPositiveButton("Yes", (dialog, which) -> {
             Intent intent = new Intent(this, MainActivity.class);
@@ -225,11 +265,12 @@ public class PaymentActivity extends AppCompatActivity {
 
     /**
      * Fonction qui affiche une boite de dialogue d'erreur de paiement
-     * @param cardValid    Numéro de carte valide
-     * @param firstNameValid    Prénom valide
-     * @param lastNameValid Nom valide
-     * @param cvvValid CVV valide
-     * @param dateValid Date valide
+     *
+     * @param cardValid      Numéro de carte valide
+     * @param firstNameValid Prénom valide
+     * @param lastNameValid  Nom valide
+     * @param cvvValid       CVV valide
+     * @param dateValid      Date valide
      */
     private void paymentRefuse(boolean cardValid, boolean firstNameValid, boolean lastNameValid, boolean cvvValid, boolean dateValid) {
         String message = "";

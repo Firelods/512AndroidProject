@@ -98,7 +98,8 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
 
-        Animation animationPopup = AnimationUtils.loadAnimation(this, R.anim.scale_small_to_big); // On charge l animation de la popup
+        Animation animationPopup = AnimationUtils.loadAnimation(this, R.anim.fade_in); // On charge l animation de la popup
+        animationPopup.setDuration(200);
         imageView.startAnimation(animationPopup); // On demarre l animation de la popup
 
         // Si on clique dessus on l enleve

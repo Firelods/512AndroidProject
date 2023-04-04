@@ -34,15 +34,11 @@ public class PurchaseAdapter extends BaseAdapter {
     private final ArrayList<Purchase> purchaseList;
     private LayoutInflater inflater;
     private AppCompatActivity listener;
-    private Bitmap carBitmap;
-
-    private final Object synchro = new Object();
 
     public PurchaseAdapter(AppCompatActivity activity, ArrayList<Purchase> purchases) {
         this.inflater = LayoutInflater.from(activity.getApplicationContext());
         this.listener = activity;
         this.purchaseList = purchases;
-        Log.e(TAG, "PurchaseAdapter: "+purchases  );
     }
 
     @Override
@@ -65,9 +61,10 @@ public class PurchaseAdapter extends BaseAdapter {
         View layoutItem;
 
         layoutItem = view == null ? inflater.inflate(R.layout.purchase_item, viewGroup, false) : view;
-//        Animation anim = AnimationUtils.loadAnimation(listener.getApplicationContext(), R.anim.right_to_left);
-//        anim.setDuration(anim.getDuration()+(i* 30L));
-//        layoutItem.startAnimation(anim);
+        Animation anim = AnimationUtils.loadAnimation(listener.getApplicationContext(), R.anim.right_to_left);
+        anim.setDuration(anim.getDuration()+(i* 30L));
+        layoutItem.startAnimation(anim);
+
 
         TextView carName = layoutItem.findViewById(R.id.purchase_product_name);
         carName.setText(this.purchaseList.get(i).getMarque()+" "+this.purchaseList.get(i).getCarName());

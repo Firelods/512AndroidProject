@@ -18,7 +18,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +33,8 @@ import pro.seinksansdoozebank.app512.util.PurchaseAdapter;
 import pro.seinksansdoozebank.app512.util.ToolBarFragment;
 
 public class PurchasesActivity extends AppCompatActivity {
-
+    private int responseCode;
+    private InputStream inputStream;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,28 +52,64 @@ public class PurchasesActivity extends AppCompatActivity {
      * Remplie la liste des achats
      */
     private void fillListView() {
-        //Recuperation du JSON en local
-        JSONObject obj = JSONTool.readJSON(this.getApplicationContext(), "purchases.json");
-        JSONArray arr;
-        try {
-            arr = obj.getJSONArray("purchases");
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
         ArrayList<Purchase> purchases = new ArrayList<>();
-        // On ajout dans une array list, tous les achats presents dans le JSON
-        for (int i = 0; i < arr.length(); i++) {
+        new Thread(() -> {
             try {
-                purchases.add(new Purchase(arr.getJSONObject(i)));
-            } catch (JSONException e) {
+                URL url = new URL("http://64.225.109.223:443/display"); // Port 80 already used
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("Content-Type", "application/json; utf-8");
+                connection.setRequestProperty("Accept", "application/json");
+                responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = connection.getInputStream();
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
+            if (inputStream != null) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                StringBuilder data = new StringBuilder();
+                try {
+                    while ((line = reader.readLine()) != null) {
+                        data.append(line);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    inputStream.close();
+                    if (data.length() > 0) {
+                        JSONArray jsonArray = new JSONArray(data.toString());
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            int carID = jsonObject.getInt("carID");
+                            String prenom = jsonObject.getString("prenom");
+                            String nom = jsonObject.getString("nom");
+                            String date = jsonObject.getString("date");
+                            String adresse = jsonObject.getString("adresse");
+                            Purchase purchase = new Purchase(carID, prenom, nom, date, adresse);
+                            purchases.add(purchase);
+                        }
+                        // Une fois tous les elements dans l arraylist on demarre l adapter avec tous les items
+                        ListView listView = findViewById(R.id.purchase_list);
+                        PurchaseAdapter adapter = new PurchaseAdapter(this, purchases);
+                        listView.setAdapter(adapter);
+                    }
 
-        // Une fois tous les elements dans l arraylist on demarre l adapter avec tous les items
-        ListView listView = findViewById(R.id.purchase_list);
-        PurchaseAdapter adapter = new PurchaseAdapter(this, purchases);
-        listView.setAdapter(adapter);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+
+
     }
 
 

@@ -10,18 +10,12 @@ public class Purchase {
     private String date;
     private String adresse;
 
-
-
-    public Purchase(JSONObject obj) {
-        try {
-            this.carId = obj.getInt("carId");
-            this.name = obj.getString("name");
-            this.lastName = obj.getString("lastName");
-            this.date = obj.getString("date");
-            this.adresse = obj.getString("adresse");
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+    public Purchase(int carID, String prenom, String nom, String date, String adresse) {
+        this.carId = carID;
+        this.name = prenom;
+        this.lastName = nom;
+        this.date = date;
+        this.adresse = adresse;
     }
 
     public String getMarque() {
