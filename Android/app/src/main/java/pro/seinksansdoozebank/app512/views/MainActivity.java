@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         setContentView(R.layout.activity_main);
         // On charge la liste des voitures (il faudrait subscribe pour l avoir en asyncrone mais manque de temps donc on attends que la liste soit chargee et on l affiche)
         ListCar.getInstance();
-        if(!ListCar.isLoad()) // Si la liste n est pas chargee on la charge
+        if(ListCar.requireLoading()) // Si la liste n est pas chargee on la charge
         {
             synchronized (sync) {
                 try {
