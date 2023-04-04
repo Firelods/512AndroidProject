@@ -43,8 +43,12 @@ import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.util.JSONTool;
 
 public class PaymentActivity extends AppCompatActivity {
-    DatePickerDialog datePickerDialog;
-    Button dateButton;
+    private DatePickerDialog datePickerDialog;
+    private Button dateButton;
+
+    private EditText firstName;
+
+    private EditText lastName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +58,11 @@ public class PaymentActivity extends AppCompatActivity {
         String adresse = getIntent().getStringExtra("adresse");
         backButton.setOnClickListener(v -> finish());
         Button buyButton = findViewById(R.id.buy_button);
-        EditText firstName = findViewById(R.id.firstName);
-        EditText lastName = findViewById(R.id.lastName);
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+
+
+
 
         initDatePicker();
         dateButton = findViewById(R.id.datePickerButton);
@@ -65,7 +72,8 @@ public class PaymentActivity extends AppCompatActivity {
         buyButton.setOnClickListener(v -> {
             if(JSONTool.savePurchaseToJSON("purchases.json", this.getApplicationContext(), carId, String.valueOf(firstName.getText()), String.valueOf(lastName.getText()), String.valueOf(dateButton.getText()),adresse)){
                 sendConfirmationNotification();
-                //TODO rajouter la page de confirmation de paiement
+                checkPayement();
+
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
@@ -160,11 +168,12 @@ public class PaymentActivity extends AppCompatActivity {
         return "JAN";
     }
 
-    public void openDatePicker(View view)
+    private void checkPayement()
     {
-        datePickerDialog.show();
-    }
+        if(true)paymentValidate();
+        else paymentRefuse();
 
+    }
 
     private void paymentValidate()
     {
@@ -178,6 +187,10 @@ public class PaymentActivity extends AppCompatActivity {
         });
 
         builder.show();
+    }
+    private void paymentRefuse()
+    {
+
     }
     
 }
