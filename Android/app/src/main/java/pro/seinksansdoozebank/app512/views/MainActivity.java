@@ -8,6 +8,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 
 import com.squareup.picasso.Picasso;
+
 
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.model.ListCar;
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         ImageView imageView = popupView.findViewById(R.id.bigger_image); // On recupere l image de la popup
         Picasso.get().load(item.getImage()).into(imageView); // On charge l image de la voiture dans l image de la popup
 
+        popupView.setBackgroundColor(Color.argb(180,0,0,0));
 
 
         /* On affiche la popup */
@@ -101,6 +104,10 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         Animation animationPopup = AnimationUtils.loadAnimation(this, R.anim.fade_in); // On charge l animation de la popup
         animationPopup.setDuration(200);
         imageView.startAnimation(animationPopup); // On demarre l animation de la popup
+
+
+
+
 
         // Si on clique dessus on l enleve
         popupView.setOnClickListener(v -> {
