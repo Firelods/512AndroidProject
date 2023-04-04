@@ -38,6 +38,10 @@ public class PurchasesActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
+        fillListView();
+    }
+
+    private void fillListView() {
         JSONObject obj = JSONTool.readJSON(this.getApplicationContext(), "purchases.json");
         JSONArray arr;
         try {
@@ -48,8 +52,8 @@ public class PurchasesActivity extends AppCompatActivity {
         ArrayList<Purchase> purchases = new ArrayList<>();
         for (int i = 0; i < arr.length(); i++) {
             try {
-                purchases.add(new Purchase(arr.getJSONObject(i)));
                 System.out.println(arr.getJSONObject(i));
+                purchases.add(new Purchase(arr.getJSONObject(i)));
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
@@ -57,7 +61,6 @@ public class PurchasesActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.purchase_list);
         PurchaseAdapter adapter = new PurchaseAdapter(this, purchases);
         listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 
 

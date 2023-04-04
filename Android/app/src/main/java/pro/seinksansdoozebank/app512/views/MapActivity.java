@@ -141,7 +141,7 @@ public class MapActivity extends AppCompatActivity {
         buyButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, PaymentActivity.class);
             intent.putExtra("carId", carId);
-            intent.putExtra("address", this.address.getText().toString());
+            intent.putExtra("adresse", this.address.getText().toString());
             startActivity(intent);
         });
     }
