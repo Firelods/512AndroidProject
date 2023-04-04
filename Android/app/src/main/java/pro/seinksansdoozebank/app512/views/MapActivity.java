@@ -1,25 +1,21 @@
 package pro.seinksansdoozebank.app512.views;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,8 +37,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-
-import android.widget.ImageButton;
 
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.util.ToolBarFragment;
@@ -168,15 +162,12 @@ public class MapActivity extends AppCompatActivity {
 
         });
 
-        this.address.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if(i== EditorInfo.IME_ACTION_DONE){
-                    rechercher.performClick();
-                    return true;
-                }
+        this.address.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if(i== EditorInfo.IME_ACTION_DONE){
+                rechercher.performClick();
                 return true;
             }
+            return true;
         });
 
         TextWatcher textWatcher = new TextWatcher() {

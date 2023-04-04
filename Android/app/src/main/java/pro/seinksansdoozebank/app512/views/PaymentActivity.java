@@ -1,52 +1,29 @@
 package pro.seinksansdoozebank.app512.views;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.text.HtmlCompat;
 
-import android.Manifest;
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.JsonWriter;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Date;
 
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.util.JSONTool;
@@ -61,9 +38,11 @@ public class PaymentActivity extends AppCompatActivity {
     private EditText dateExpiration;
     private EditText lastName;
     private int responseCode;
-    private InputStream inputStream;
     private String adresse;
     private int carId;
+
+    public PaymentActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,13 +110,10 @@ public class PaymentActivity extends AppCompatActivity {
      * Initialise le DatePicker à la date du jour
      */
     private void initDatePicker() {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                String date = makeDateString(day, month, year);
-                dateButton.setText(date);
-            }
+        DatePickerDialog.OnDateSetListener dateSetListener = (datePicker, year, month, day) -> {
+            month = month + 1;
+            String date = makeDateString(day, month, year);
+            dateButton.setText(date);
         };
 
         Calendar cal = Calendar.getInstance();
@@ -204,7 +180,7 @@ public class PaymentActivity extends AppCompatActivity {
         boolean firstNameValid = firstName.getText().toString().matches("^[a-zA-Z]+$");
         boolean lastNameValid = lastName.getText().toString().matches("^[a-zA-Z]+$");
         boolean cvvValid = cvv.getText().toString().matches("^[0-9]{3}$");
-        boolean dateValid = dateExpiration.getText().toString().matches("^(0[1-9]|1[0-2])\\/([0-9]{2})$");
+        boolean dateValid = dateExpiration.getText().toString().matches("^(0[1-9]|1[0-2])/([0-9]{2})$");
         if (cardNumberValid
                 && firstNameValid
                 && lastNameValid
@@ -242,11 +218,11 @@ public class PaymentActivity extends AppCompatActivity {
                 connection.setDoOutput(true);
                 String jsonInputString = "{\"carID\": \"" + carId + "\", \"prenom\": \"" + firstName.getText().toString() + "\", \"nom\": \"" + lastName.getText().toString() + "\", \"date\": \"" + dateButton.getText().toString() + "\", \"adresse\": \"" + adresse + "\"}";
                 try (OutputStream os = connection.getOutputStream()) {
-                    byte[] input = jsonInputString.getBytes("utf-8");
+                    byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
                     os.write(input, 0, input.length);
                 }
 
-                responseCode = connection.getResponseCode();
+                this.responseCode = connection.getResponseCode();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {

@@ -1,19 +1,13 @@
 package pro.seinksansdoozebank.app512.model;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class Purchase {
-    private int carId;
-    private String name;
-    private String lastName;
-    private String date;
-    private String adresse;
+    private final int carId;
 
-    public Purchase(int carID, String prenom, String nom, String date, String adresse) {
+    private final String date;
+    private final String adresse;
+
+    public Purchase(int carID,String date, String adresse) {
         this.carId = carID;
-        this.name = prenom;
-        this.lastName = nom;
         this.date = date;
         this.adresse = adresse;
     }

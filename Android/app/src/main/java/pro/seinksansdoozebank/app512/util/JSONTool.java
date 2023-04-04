@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,9 +36,7 @@ public class JSONTool {
         String jsonString = root.toString();
         try {
             FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-            if (jsonString != null) {
-                fos.write(jsonString.getBytes());
-            }
+            fos.write(jsonString.getBytes());
             fos.close();
             return true;
         } catch (IOException fileNotFound) {
@@ -70,13 +67,8 @@ public class JSONTool {
                 obj.put("purchases", arr);
                 return obj;
             }
-            JSONObject obj = new JSONObject(sb.toString());
-            JSONArray arr = obj.getJSONArray("purchases");
-            for (int i = 0; i < arr.length(); i++)
-            {
-                String name = arr.getJSONObject(i).getString("name");
-            }
-            return obj;
+
+            return new JSONObject(sb.toString());
         } catch (JSONException fileNotFound) {
             throw new RuntimeException(fileNotFound);
         }

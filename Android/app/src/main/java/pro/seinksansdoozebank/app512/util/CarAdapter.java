@@ -2,8 +2,6 @@ package pro.seinksansdoozebank.app512.util;
 
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +14,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.model.ListCar;
-import pro.seinksansdoozebank.app512.views.MainActivity;
 
 public class CarAdapter extends BaseAdapter {
 
     private final LayoutInflater inflater;
     private final CarAdapterListener listener;
 
-    private final Object synchro = new Object();
 
     public CarAdapter(CarAdapterListener listener) {
         this.inflater = LayoutInflater.from(listener.getContext());

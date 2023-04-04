@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 
 import pro.seinksansdoozebank.app512.R;
 
@@ -38,8 +38,8 @@ public class ToolBarFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getView().findViewById(R.id.tool_bar_back_button).setOnClickListener(listener);
-        TextView textView = getView().findViewById(R.id.toolbar_title);
+        requireView().findViewById(R.id.tool_bar_back_button).setOnClickListener(listener);
+        TextView textView = requireView().findViewById(R.id.toolbar_title);
         textView.setText(title);
         textView.setTextSize(size);
     }

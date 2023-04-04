@@ -1,22 +1,15 @@
 package pro.seinksansdoozebank.app512.views;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Adapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,11 +17,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.model.Purchase;
-import pro.seinksansdoozebank.app512.util.JSONTool;
 import pro.seinksansdoozebank.app512.util.PurchaseAdapter;
 import pro.seinksansdoozebank.app512.util.ToolBarFragment;
 
@@ -49,18 +40,7 @@ public class PurchasesActivity extends AppCompatActivity {
 
         // On remplie la liste des achats
         fillListView();
-//        synchronized (waiter)
-//        {
-//            try {
-//                waiter.wait();
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//        System.out.println(purchases);
-//        ListView listView = findViewById(R.id.purchase_list);
-//        PurchaseAdapter adapter = new PurchaseAdapter(this, purchases);
-//        listView.setAdapter(adapter);
+
     }
 
 
@@ -103,11 +83,9 @@ public class PurchasesActivity extends AppCompatActivity {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             int carID = jsonObject.getInt("carID");
-                            String prenom = jsonObject.getString("prenom");
-                            String nom = jsonObject.getString("nom");
                             String date = jsonObject.getString("date");
                             String adresse = jsonObject.getString("adresse");
-                            Purchase purchase = new Purchase(carID, prenom, nom, date, adresse);
+                            Purchase purchase = new Purchase(carID, date, adresse);
                             System.out.println(purchase);
                             purchases.add(purchase);
                         }
@@ -118,13 +96,7 @@ public class PurchasesActivity extends AppCompatActivity {
                             PurchaseAdapter adapter = new PurchaseAdapter(this, purchases);
                             listView.setAdapter(adapter);
                         });
-
-//                        synchronized (waiter)
-//                        {
-//                            waiter.notify();
-//                        }
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {

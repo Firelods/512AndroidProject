@@ -1,12 +1,7 @@
 package pro.seinksansdoozebank.app512.util;
 
-import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.model.ListCar;
@@ -32,8 +23,8 @@ import pro.seinksansdoozebank.app512.model.Purchase;
 
 public class PurchaseAdapter extends BaseAdapter {
     private final ArrayList<Purchase> purchaseList;
-    private LayoutInflater inflater;
-    private AppCompatActivity listener;
+    private final LayoutInflater inflater;
+    private final AppCompatActivity listener;
 
     public PurchaseAdapter(AppCompatActivity activity, ArrayList<Purchase> purchases) {
         this.inflater = LayoutInflater.from(activity.getApplicationContext());
@@ -56,6 +47,7 @@ public class PurchaseAdapter extends BaseAdapter {
         return i;
     }
 
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View layoutItem;

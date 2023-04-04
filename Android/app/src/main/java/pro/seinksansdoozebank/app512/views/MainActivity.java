@@ -1,8 +1,5 @@
 package pro.seinksansdoozebank.app512.views;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -11,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,18 +17,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
-
 import pro.seinksansdoozebank.app512.R;
+import pro.seinksansdoozebank.app512.model.Car;
 import pro.seinksansdoozebank.app512.model.ListCar;
 import pro.seinksansdoozebank.app512.util.CarAdapter;
-import pro.seinksansdoozebank.app512.model.Car;
 import pro.seinksansdoozebank.app512.util.CarAdapterListener;
-import pro.seinksansdoozebank.app512.util.JSONTool;
 
 public class MainActivity extends AppCompatActivity implements CarAdapterListener {
 
@@ -113,9 +108,7 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
 
 
         // Si on clique dessus on l enleve
-        popupView.setOnClickListener(v -> {
-            popupWindow.dismiss();
-        });
+        popupView.setOnClickListener(v -> popupWindow.dismiss());
 
     }
 

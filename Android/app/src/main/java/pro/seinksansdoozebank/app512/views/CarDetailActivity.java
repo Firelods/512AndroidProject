@@ -1,23 +1,15 @@
 package pro.seinksansdoozebank.app512.views;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
-
-import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Locale;
 
 import pro.seinksansdoozebank.app512.R;
@@ -27,10 +19,6 @@ import pro.seinksansdoozebank.app512.util.ToolBarFragment;
 
 public class CarDetailActivity extends AppCompatActivity {
 
-    /**
-     * La voiture a afficher
-     */
-    private Car car;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +36,12 @@ public class CarDetailActivity extends AppCompatActivity {
         TextView carDescription = findViewById(R.id.car_description);
 
         // Affiche les donnees de la voiture
-        car = ListCar.getInstance().get(carId);
+
+        Car car = ListCar.getInstance().get(carId);
         Picasso.get().load(car.getImage()).into(carImage); // image async
 
-        carName.setText(String.format("%s %s",car.getMarque(),car.getName()));
-        carPrice.setText(String.format(Locale.FRANCE,"%.2f€",car.getPrice()));
+        carName.setText(String.format("%s %s", car.getMarque(), car.getName()));
+        carPrice.setText(String.format(Locale.FRANCE,"%.2f€", car.getPrice()));
         carDescription.setText(car.getDescription());
 
 
