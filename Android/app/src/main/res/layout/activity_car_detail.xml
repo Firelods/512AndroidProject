@@ -77,7 +77,8 @@
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:text="@string/buy_button_text"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:elevation="20dp"/>
 
     </LinearLayout>
 
