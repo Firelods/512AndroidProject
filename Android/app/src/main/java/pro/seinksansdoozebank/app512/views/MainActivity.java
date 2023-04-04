@@ -29,6 +29,9 @@ import pro.seinksansdoozebank.app512.model.ListCar;
 import pro.seinksansdoozebank.app512.util.CarAdapter;
 import pro.seinksansdoozebank.app512.util.CarAdapterListener;
 
+/**
+ * Activite principale qui affiche la liste des voitures
+ */
 public class MainActivity extends AppCompatActivity implements CarAdapterListener {
 
     public static final Object sync = new Object();
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
 
 
     /**
-     * Lorsqu un item de la liste est clique
+     * Gestion d'un clique sur une item de la liste
      * @param item la voiture cliquee
      */
     @Override
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
 
     /**
      *
-     * Permet d afficher en grand l image de la voiture
+     * Permet d"afficher en grand l'image de la voiture
      * @param item correspond a la voiture sur laquelle on clique sur l image
      */
     @Override
@@ -90,22 +93,15 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         @SuppressLint("InflateParams") View popupView = inflater.inflate(R.layout.image_pop_up, null); // On recupere la vue de la popup
         ImageView imageView = popupView.findViewById(R.id.bigger_image); // On recupere l image de la popup
         Picasso.get().load(item.getImage()).into(imageView); // On charge l image de la voiture dans l image de la popup
-
         popupView.setBackgroundColor(Color.argb(180,0,0,0));
-
 
         /* On affiche la popup */
         PopupWindow popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
-
         Animation animationPopup = AnimationUtils.loadAnimation(this, R.anim.fade_in); // On charge l animation de la popup
         animationPopup.setDuration(200);
         imageView.startAnimation(animationPopup); // On demarre l animation de la popup
-
-
-
-
 
         // Si on clique dessus on l enleve
         popupView.setOnClickListener(v -> popupWindow.dismiss());

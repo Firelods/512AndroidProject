@@ -17,6 +17,9 @@ import pro.seinksansdoozebank.app512.model.Car;
 import pro.seinksansdoozebank.app512.model.ListCar;
 import pro.seinksansdoozebank.app512.util.ToolBarFragment;
 
+/**
+ * Activite qui affiche les details d'une voiture
+ */
 public class CarDetailActivity extends AppCompatActivity {
 
     @Override
@@ -51,6 +54,7 @@ public class CarDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MapActivity.class);
             intent.putExtra("carId", carId);
             startActivity(intent);
+            // Animation de transition
             overridePendingTransition(R.anim.slide_in_from_right, R.anim.dontmove);
         });
     }
@@ -58,6 +62,7 @@ public class CarDetailActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
+        // Animation de retour
         overridePendingTransition(R.anim.dontmove, R.anim.slide_out_from_left);
     }
 }

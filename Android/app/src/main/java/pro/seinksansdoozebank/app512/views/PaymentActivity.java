@@ -29,6 +29,9 @@ import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.util.JSONTool;
 import pro.seinksansdoozebank.app512.util.ToolBarFragment;
 
+/**
+ * Activité de paiement
+ */
 public class PaymentActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
@@ -37,7 +40,6 @@ public class PaymentActivity extends AppCompatActivity {
     private EditText cvv;
     private EditText dateExpiration;
     private EditText lastName;
-    private int responseCode;
     private String adresse;
     private int carId;
 
@@ -202,27 +204,22 @@ public class PaymentActivity extends AppCompatActivity {
         builder.setTitle("Paiement");
         builder.setMessage("Paiement accepté");
         sendConfirmationNotification();
+        //Création d'un nouveau thread pour envoyer les données à l'API
         new Thread(() -> {
             try {
-                URL url = new URL("http://64.225.109.223:443/ajouter");// TODO : URL du POST de l'API
+                //Création de la connexion
+                URL url = new URL("http://64.225.109.223:443/ajouter");
+                //Création de la requête
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json; utf-8");
                 connection.setRequestProperty("Accept", "application/json");
-                // send the post body with carId", c
-                //name"
-                //lastName"
-                //date"
-                //adresse"
-
                 connection.setDoOutput(true);
                 String jsonInputString = "{\"carID\": \"" + carId + "\", \"prenom\": \"" + firstName.getText().toString() + "\", \"nom\": \"" + lastName.getText().toString() + "\", \"date\": \"" + dateButton.getText().toString() + "\", \"adresse\": \"" + adresse + "\"}";
                 try (OutputStream os = connection.getOutputStream()) {
                     byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
                     os.write(input, 0, input.length);
                 }
-
-                this.responseCode = connection.getResponseCode();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -243,11 +240,11 @@ public class PaymentActivity extends AppCompatActivity {
     /**
      * Fonction qui affiche une boite de dialogue d'erreur de paiement
      *
-     * @param cardValid      Numéro de carte valide
-     * @param firstNameValid Prénom valide
-     * @param lastNameValid  Nom valide
-     * @param cvvValid       CVV valide
-     * @param dateValid      Date valide
+     * @param cardValid      validité de la carte
+     * @param firstNameValid validité du prénom
+     * @param lastNameValid  validité du nom
+     * @param cvvValid       validité du cvv
+     * @param dateValid      validité de la date
      */
     private void paymentRefuse(boolean cardValid, boolean firstNameValid, boolean lastNameValid, boolean cvvValid, boolean dateValid) {
         String message = "";

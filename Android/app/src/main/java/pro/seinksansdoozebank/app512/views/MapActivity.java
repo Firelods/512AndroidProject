@@ -41,6 +41,9 @@ import java.util.ArrayList;
 import pro.seinksansdoozebank.app512.R;
 import pro.seinksansdoozebank.app512.util.ToolBarFragment;
 
+/**
+ * Activité de choix de l'adresse de livraison
+ */
 public class MapActivity extends AppCompatActivity {
     private EditText address;
     private Button buyButton;

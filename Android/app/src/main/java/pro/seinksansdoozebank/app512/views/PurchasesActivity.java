@@ -23,6 +23,9 @@ import pro.seinksansdoozebank.app512.model.Purchase;
 import pro.seinksansdoozebank.app512.util.PurchaseAdapter;
 import pro.seinksansdoozebank.app512.util.ToolBarFragment;
 
+/**
+ * Activité qui affiche la liste des achats
+ */
 public class PurchasesActivity extends AppCompatActivity {
     private int responseCode;
     private InputStream inputStream;
@@ -32,9 +35,10 @@ public class PurchasesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchases);
-        //initialsation
+        //initialsation de la liste des achats
         purchases = new ArrayList<>();
 
+        // On ajoute le fragment de la toolbar
         ToolBarFragment toolBarFragment = new ToolBarFragment(v -> finish(), getString(R.string.purchases_activity_title), 32);
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,toolBarFragment).commit();
 
@@ -50,11 +54,13 @@ public class PurchasesActivity extends AppCompatActivity {
     private void fillListView() {
         new Thread(() -> {
             try {
+                //Connexion à l'API
                 URL url = new URL("http://64.225.109.223:443/display"); // Port 80 already used
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("Content-Type", "application/json; utf-8");
                 connection.setRequestProperty("Accept", "application/json");
+                //envoie de la requete
                 responseCode = connection.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     inputStream = connection.getInputStream();
@@ -65,6 +71,7 @@ public class PurchasesActivity extends AppCompatActivity {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            //lecture de la reponse
             if (inputStream != null) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 String line;
@@ -79,6 +86,7 @@ public class PurchasesActivity extends AppCompatActivity {
                 try {
                     inputStream.close();
                     if (data.length() > 0) {
+                        //Construction d'un JSONArray contenat tous les achats récupérés pour les ajouter à l'arraylist des achats
                         JSONArray jsonArray = new JSONArray(data.toString());
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -110,6 +118,7 @@ public class PurchasesActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
+        // Animation de transition
         overridePendingTransition(R.anim.dontmove, R.anim.slide_out_from_left);
 
     }
