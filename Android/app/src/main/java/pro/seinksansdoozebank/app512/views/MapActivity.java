@@ -6,6 +6,8 @@ import androidx.preference.PreferenceManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -96,6 +98,7 @@ public class MapActivity extends AppCompatActivity {
         Button rechercher = findViewById(R.id.research);
         this.map = findViewById(R.id.map);
 
+        rechercher.setEnabled(false);
 
 
 
@@ -175,6 +178,27 @@ public class MapActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length()>0){
+                    rechercher.setEnabled(true);
+                }
+                else{
+                    rechercher.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        };
+        address.addTextChangedListener(textWatcher);
 
         // Dans le cas ou le buyButton est visible on lui ajoute un listener pour lancer l activite de paiement
         buyButton.setOnClickListener(v -> {
