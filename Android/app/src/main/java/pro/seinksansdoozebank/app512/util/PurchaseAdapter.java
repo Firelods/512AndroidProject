@@ -59,15 +59,14 @@ public class PurchaseAdapter extends BaseAdapter {
         return i;
     }
 
-    @SuppressLint("DefaultLocale")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View layoutItem;
 
         layoutItem = view == null ? inflater.inflate(R.layout.purchase_item, viewGroup, false) : view;
-        Animation anim = AnimationUtils.loadAnimation(listener.getApplicationContext(), R.anim.right_to_left);
-        anim.setDuration(anim.getDuration()+(i* 30L));
-        layoutItem.startAnimation(anim);
+//        Animation anim = AnimationUtils.loadAnimation(listener.getApplicationContext(), R.anim.right_to_left);
+//        anim.setDuration(anim.getDuration()+(i* 30L));
+//        layoutItem.startAnimation(anim);
 
         TextView carName = layoutItem.findViewById(R.id.purchase_product_name);
         carName.setText(this.purchaseList.get(i).getMarque()+" "+this.purchaseList.get(i).getCarName());

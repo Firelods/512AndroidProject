@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
                 }
             }
         }
-        JSONTool.savePurchaseToJSON("purchases.json", this.getApplicationContext(), 4, "Clément", "lefevre", "15-09-2022", "34 avenue saint augustin Nice");
+//        JSONTool.savePurchaseToJSON("purchases.json", this.getApplicationContext(), 4, "Clément", "lefevre", "15-09-2022", "34 avenue saint augustin Nice");
 
         createNotificationChannel();
         ImageButton button = findViewById(R.id.purchases_button);

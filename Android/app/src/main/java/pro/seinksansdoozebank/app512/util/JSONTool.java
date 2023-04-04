@@ -19,8 +19,8 @@ import java.io.InputStreamReader;
 public class JSONTool {
 
     public static boolean savePurchaseToJSON(String fileName, Context context, int carId, String name, String lastName, String date,String adresse) {
-        JSONObject root = JSONTool.readJSON(context, fileName);
-        JSONArray jsonArray = root.optJSONArray("purchases");
+        JSONObject root = new JSONObject(); //JSONTool.readJSON(context, fileName);
+        JSONArray jsonArray = new JSONArray(); //root.optJSONArray("purchases");
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("carId", carId);
