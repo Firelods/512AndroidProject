@@ -58,7 +58,7 @@ public class CarAdapter extends BaseAdapter {
 
         layoutItem = view == null ? inflater.inflate(R.layout.car_item, viewGroup, false) : view;
         Animation anim = AnimationUtils.loadAnimation(listener.getContext(), R.anim.right_to_left);
-        anim.setDuration(anim.getDuration()+(i* 30L));
+        anim.setDuration(anim.getDuration() + (i * 30L));
         layoutItem.startAnimation(anim);
 
         TextView carBrand = layoutItem.findViewById(R.id.product_brand);
@@ -77,10 +77,10 @@ public class CarAdapter extends BaseAdapter {
         carName.setText(ListCar.getInstance().get(i).getName());
 
         TextView carPrice = layoutItem.findViewById(R.id.product_price);
-        carPrice.setText(String.format("%.2f€",ListCar.getInstance().get(i).getPrice()));
+        carPrice.setText(String.format("%.2f€", ListCar.getInstance().get(i).getPrice()));
 
         layoutItem.setOnClickListener(c -> listener.onClickProduct(ListCar.getInstance().get(i)));
-
+        layoutItem.setElevation(20);
         return layoutItem;
     }
 }

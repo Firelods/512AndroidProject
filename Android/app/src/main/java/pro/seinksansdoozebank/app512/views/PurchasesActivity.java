@@ -35,16 +35,35 @@ import pro.seinksansdoozebank.app512.util.ToolBarFragment;
 public class PurchasesActivity extends AppCompatActivity {
     private int responseCode;
     private InputStream inputStream;
+    private ArrayList<Purchase> purchases ;
+
+    private Object waiter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchases);
+        //initialsation
+        purchases = new ArrayList<>();
+        waiter= new Object();
 
         ToolBarFragment toolBarFragment = new ToolBarFragment(v -> finish(), getString(R.string.purchases_activity_title), 32);
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,toolBarFragment).commit();
 
         // On remplie la liste des achats
         fillListView();
+//        synchronized (waiter)
+//        {
+//            try {
+//                waiter.wait();
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//        System.out.println(purchases);
+//        ListView listView = findViewById(R.id.purchase_list);
+//        PurchaseAdapter adapter = new PurchaseAdapter(this, purchases);
+//        listView.setAdapter(adapter);
     }
 
 
@@ -52,7 +71,6 @@ public class PurchasesActivity extends AppCompatActivity {
      * Remplie la liste des achats
      */
     private void fillListView() {
-        ArrayList<Purchase> purchases = new ArrayList<>();
         new Thread(() -> {
             try {
                 URL url = new URL("http://64.225.109.223:443/display"); // Port 80 already used
@@ -93,12 +111,21 @@ public class PurchasesActivity extends AppCompatActivity {
                             String date = jsonObject.getString("date");
                             String adresse = jsonObject.getString("adresse");
                             Purchase purchase = new Purchase(carID, prenom, nom, date, adresse);
+                            System.out.println(purchase);
                             purchases.add(purchase);
                         }
+
                         // Une fois tous les elements dans l arraylist on demarre l adapter avec tous les items
-                        ListView listView = findViewById(R.id.purchase_list);
-                        PurchaseAdapter adapter = new PurchaseAdapter(this, purchases);
-                        listView.setAdapter(adapter);
+                        runOnUiThread(() -> {
+                            ListView listView = findViewById(R.id.purchase_list);
+                            PurchaseAdapter adapter = new PurchaseAdapter(this, purchases);
+                            listView.setAdapter(adapter);
+                        });
+
+//                        synchronized (waiter)
+//                        {
+//                            waiter.notify();
+//                        }
                     }
 
                 } catch (IOException e) {
