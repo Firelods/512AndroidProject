@@ -39,8 +39,8 @@
 
             <EditText
                 android:id="@+id/firstName"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_marginTop="10dp"
                 android:autofillHints="name"
                 android:background="@drawable/bg_rounded_corner"
@@ -59,8 +59,8 @@
 
             <EditText
                 android:id="@+id/lastName"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_marginTop="10dp"
                 android:autofillHints="name"
                 android:background="@drawable/bg_rounded_corner"
@@ -79,8 +79,8 @@
 
             <Button
                 android:id="@+id/datePickerButton"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_rounded_corner"
                 android:textColor="@color/black" />
@@ -96,8 +96,8 @@
 
             <EditText
                 android:id="@+id/cardNumber"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_marginTop="10dp"
                 android:autofillHints="creditCardNumber"
                 android:background="@drawable/bg_rounded_corner"
