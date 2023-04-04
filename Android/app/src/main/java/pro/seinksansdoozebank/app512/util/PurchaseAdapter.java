@@ -45,7 +45,6 @@ public class PurchaseAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        Log.e(TAG, "getCount: "+purchaseList.size() );
         return purchaseList.size();
     }
 
