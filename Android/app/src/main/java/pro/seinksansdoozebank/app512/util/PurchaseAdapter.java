@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -71,24 +73,7 @@ public class PurchaseAdapter extends BaseAdapter {
         carName.setText(this.purchaseList.get(i).getMarque()+" "+this.purchaseList.get(i).getCarName());
         carName.setTypeface(Typeface.DEFAULT_BOLD);
         ImageView imageView = layoutItem.findViewById(R.id.product_image);
-        new Thread(()->{
-            try {
-                synchronized (synchro){
-                    this.carBitmap = BitmapFactory.decodeStream((InputStream)new URL(ListCar.getInstance().get(purchaseList.get(i).getId()).getImage()).getContent());
-                    synchro.notify();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
-        synchronized (synchro){
-            try {
-                synchro.wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            imageView.setImageBitmap(this.carBitmap);
-        }
+        Picasso.get().load(ListCar.getInstance().get(purchaseList.get(i).getId()).getImage()).into(imageView);
 
         TextView carPrice = layoutItem.findViewById(R.id.product_price1);
         carPrice.setText(String.format("%.2f€",this.purchaseList.get(i).getPrice()));

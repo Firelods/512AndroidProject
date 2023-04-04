@@ -8,6 +8,8 @@
 
     <ImageView
         android:id="@+id/product_image"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="14dp"
