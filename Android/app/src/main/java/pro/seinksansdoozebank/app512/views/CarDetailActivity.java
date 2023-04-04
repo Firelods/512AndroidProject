@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -37,27 +39,9 @@ public class CarDetailActivity extends AppCompatActivity {
         TextView carName = findViewById(R.id.car_name);
         TextView carPrice = findViewById(R.id.car_price);
         TextView carDescription = findViewById(R.id.car_description);
-
         car = ListCar.getInstance().get(carId);
-        new Thread(()->{
-            try {
-                synchronized (synchro){
+        Picasso.get().load(car.getImage()).into(carImage);
 
-                    this.carBitmap = BitmapFactory.decodeStream((InputStream)new URL(car.getImage()).getContent());
-                    synchro.notify();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
-        synchronized (synchro){
-            try {
-                synchro.wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            carImage.setImageBitmap(this.carBitmap);
-        }
         carName.setText(String.format("%s %s",car.getMarque(),car.getName()));
         carPrice.setText(String.format(Locale.FRANCE,"%.2f€",car.getPrice()));
         carDescription.setText(car.getDescription());

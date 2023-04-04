@@ -77,7 +77,13 @@ public class MapActivity extends AppCompatActivity {
         this.address = findViewById(R.id.address);
         Button rechercher = findViewById(R.id.research);
 
+
+
         this.map = findViewById(R.id.map);
+        Animation mapAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+        map.setAnimation(mapAnim);
+
+
         map.setTileSource(TileSourceFactory.MAPNIK); // Design pattern factory -> render
         map.setBuiltInZoomControls(true); // zoom -> true
         GeoPoint startPoint = new GeoPoint(48.8534, 2.3488); // Paris
@@ -94,8 +100,11 @@ public class MapActivity extends AppCompatActivity {
             final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
+
+
             String txt = address.getText().toString();
             if(txt.length() > 0){
+
                 map.getOverlays().clear();
                 this.coordinates.clear();
 
@@ -176,6 +185,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     private void research(String address) {
+
         new Thread(() -> {
             try {
                 URL url = new URL("http://api.positionstack.com/v1/forward?access_key="+this.api_free_key+"&query="+address+"&results.map_url");

@@ -14,6 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -65,25 +67,8 @@ public class CarAdapter extends BaseAdapter {
         carBrand.setText(ListCar.getInstance().get(i).getMarque());
         carBrand.setTypeface(Typeface.DEFAULT_BOLD);
         ImageView imageView = layoutItem.findViewById(R.id.product_image);
-        new Thread(()->{
-            try {
-                synchronized (synchro){
+        Picasso.get().load(ListCar.getInstance().get(i).getImage()).into(imageView);
 
-                    this.carBitmap = BitmapFactory.decodeStream((InputStream)new URL(ListCar.getInstance().get(i).getImage()).getContent());
-                    synchro.notify();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
-        synchronized (synchro){
-            try {
-                synchro.wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            imageView.setImageBitmap(this.carBitmap);
-        }
 
 
         TextView carName = layoutItem.findViewById(R.id.product_name);
