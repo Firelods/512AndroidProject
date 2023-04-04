@@ -26,8 +26,8 @@ import pro.seinksansdoozebank.app512.views.MainActivity;
 
 public class CarAdapter extends BaseAdapter {
 
-    private LayoutInflater inflater;
-    private CarAdapterListener listener;
+    private final LayoutInflater inflater;
+    private final CarAdapterListener listener;
 
     private final Object synchro = new Object();
 
@@ -61,20 +61,18 @@ public class CarAdapter extends BaseAdapter {
         anim.setDuration(anim.getDuration() + (i * 30L));
         layoutItem.startAnimation(anim);
 
-        TextView carBrand = layoutItem.findViewById(R.id.product_brand);
+        TextView carName = layoutItem.findViewById(R.id.product_name);
         ListCar.getInstance();
-        carBrand.setText(ListCar.getInstance().get(i).getMarque());
-        carBrand.setTypeface(Typeface.DEFAULT_BOLD);
+        carName.setText(ListCar.getInstance().get(i).getMarque());
         ImageView imageView = layoutItem.findViewById(R.id.product_image);
         Picasso.get().load(ListCar.getInstance().get(i).getImage()).into(imageView);
 
         imageView.setOnClickListener(c ->
-        {
-            listener.onClickImage(ListCar.getInstance().get(i));
-        });
+                listener.onClickImage(ListCar.getInstance().get(i)));
 
-        TextView carName = layoutItem.findViewById(R.id.product_name);
-        carName.setText(ListCar.getInstance().get(i).getName());
+        TextView carBrand = layoutItem.findViewById(R.id.product_brand);
+        carBrand.setText(ListCar.getInstance().get(i).getName());
+        carBrand.setTypeface(Typeface.DEFAULT_BOLD);
 
         TextView carPrice = layoutItem.findViewById(R.id.product_price);
         carPrice.setText(String.format("%.2f€", ListCar.getInstance().get(i).getPrice()));
