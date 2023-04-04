@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         button.setOnClickListener(v -> {
             Intent intent = new Intent(this, PurchasesActivity.class); // Si on click sur un bouton on va sur la page des achats qui repertories nos commandes
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_from_right, R.anim.dontmove);
         });
         ListView listView = findViewById(R.id.car_list); // On recupere la liste des voitures
         listView.setAdapter(new CarAdapter(this)); // On lui definit son contenu grace au car Adapter
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         Intent intent = new Intent(this, CarDetailActivity.class);
         intent.putExtra("carId", item.getID());
         startActivity(intent);
+
+        overridePendingTransition(R.anim.slide_in_from_right, R.anim.dontmove);
     }
 
     /**
@@ -150,5 +153,4 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
             notificationManager.createNotificationChannel(channel);
         }
     }
-
 }

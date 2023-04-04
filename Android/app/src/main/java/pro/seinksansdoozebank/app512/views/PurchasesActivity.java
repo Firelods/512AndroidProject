@@ -37,15 +37,12 @@ public class PurchasesActivity extends AppCompatActivity {
     private InputStream inputStream;
     private ArrayList<Purchase> purchases ;
 
-    private Object waiter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchases);
         //initialsation
         purchases = new ArrayList<>();
-        waiter= new Object();
 
         ToolBarFragment toolBarFragment = new ToolBarFragment(v -> finish(), getString(R.string.purchases_activity_title), 32);
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,toolBarFragment).commit();
@@ -136,6 +133,13 @@ public class PurchasesActivity extends AppCompatActivity {
             }
         }).start();
 
+
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.dontmove, R.anim.slide_out_from_left);
 
     }
 

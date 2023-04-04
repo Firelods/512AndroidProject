@@ -258,6 +258,7 @@ public class PaymentActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", (dialog, which) -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_from_right, R.anim.dontmove);
         });
 
         builder.show();
@@ -290,5 +291,11 @@ public class PaymentActivity extends AppCompatActivity {
             message += "Date expiration invalide";
         }
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.dontmove, R.anim.slide_out_from_left);
     }
 }

@@ -62,8 +62,13 @@ public class CarDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MapActivity.class);
             intent.putExtra("carId", carId);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_from_right, R.anim.dontmove);
         });
     }
 
-
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.dontmove, R.anim.slide_out_from_left);
+    }
 }

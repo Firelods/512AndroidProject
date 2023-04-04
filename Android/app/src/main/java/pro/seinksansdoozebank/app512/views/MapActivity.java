@@ -186,12 +186,7 @@ public class MapActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length()>0){
-                    rechercher.setEnabled(true);
-                }
-                else{
-                    rechercher.setEnabled(false);
-                }
+                rechercher.setEnabled(charSequence.length() > 0);
             }
 
             @Override
@@ -206,6 +201,7 @@ public class MapActivity extends AppCompatActivity {
             intent.putExtra("carId", carId);
             intent.putExtra("adresse", this.address.getText().toString());
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_from_right, R.anim.dontmove);
         });
     }
 
@@ -360,5 +356,11 @@ public class MapActivity extends AppCompatActivity {
         mapController.setZoom(4.0);
         mapController.setCenter(startPoint);
     }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.dontmove, R.anim.slide_out_from_left);
+    }
+
 
 }
