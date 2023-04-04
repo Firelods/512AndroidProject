@@ -86,7 +86,6 @@ public class PurchasesActivity extends AppCompatActivity {
                             String date = jsonObject.getString("date");
                             String adresse = jsonObject.getString("adresse");
                             Purchase purchase = new Purchase(carID, date, adresse);
-                            System.out.println(purchase);
                             purchases.add(purchase);
                         }
 

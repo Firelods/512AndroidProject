@@ -1,9 +1,22 @@
 package pro.seinksansdoozebank.app512.model;
 
+/**
+ * Classe représentant un achat effectué sur l'application
+ */
 public class Purchase {
+    /**
+     * Identifiant de la voiture achetée
+     */
     private final int carId;
 
+    /**
+     * Date de livraison de la voiture
+     */
     private final String date;
+
+    /**
+     * Adresse de livraison de la voiture
+     */
     private final String adresse;
 
     public Purchase(int carID,String date, String adresse) {
