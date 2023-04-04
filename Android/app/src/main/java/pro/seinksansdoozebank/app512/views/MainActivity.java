@@ -69,12 +69,11 @@ public class MainActivity extends AppCompatActivity implements CarAdapterListene
         startActivity(intent);
     }
 
-    @SuppressLint({"InflateParams", "ResourceType"})
     @Override
     public void onClickImage(Car item) {
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.image_pop_up, null);
+        @SuppressLint("InflateParams") View popupView = inflater.inflate(R.layout.image_pop_up, null);
         ImageView imageView = popupView.findViewById(R.id.bigger_image);
         Picasso.get().load(item.getImage()).into(imageView);
 
