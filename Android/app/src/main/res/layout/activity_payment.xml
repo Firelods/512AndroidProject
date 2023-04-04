@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,9 +9,9 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
+        android:name="pro.seinksansdoozebank.app512.util.ToolBarFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="pro.seinksansdoozebank.app512.util.ToolBarFragment"/>
+        android:layout_height="wrap_content" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="wrap_content"
@@ -35,16 +34,19 @@
                 android:layout_height="wrap_content"
                 android:text="@string/prenom"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:labelFor="@id/firstName"/>
 
             <EditText
                 android:id="@+id/firstName"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:textColor="@color/black"
-                android:paddingHorizontal="20dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bg_rounded_corner" />
+                android:autofillHints="name"
+                android:background="@drawable/bg_rounded_corner"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="20dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,16 +54,19 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/nom"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:labelFor="@id/lastName"/>
 
             <EditText
                 android:id="@+id/lastName"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:textColor="@color/black"
-                android:paddingHorizontal="20dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bg_rounded_corner" />
+                android:autofillHints="name"
+                android:background="@drawable/bg_rounded_corner"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="20dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,16 +75,15 @@
                 android:text="@string/date_livraison"
                 android:textColor="@color/black"
                 android:textSize="25sp"
-
-                />
+                android:labelFor="@id/datePickerButton"/>
 
             <Button
                 android:id="@+id/datePickerButton"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                android:background="@drawable/bg_rounded_corner" />
+                android:background="@drawable/bg_rounded_corner"
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,54 +92,61 @@
                 android:text="@string/cb"
                 android:textColor="@color/black"
                 android:textSize="25sp"
-
-                />
+                android:labelFor="@id/cardNumber"/>
 
             <EditText
                 android:id="@+id/cardNumber"
                 android:layout_width="300dp"
-                android:textColor="@color/black"
-
-                android:paddingHorizontal="20dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bg_rounded_corner" />
+                android:autofillHints="creditCardNumber"
+                android:background="@drawable/bg_rounded_corner"
+                android:inputType="number"
+                android:paddingHorizontal="20dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cvv"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:labelFor="@id/cvv"/>
 
             <EditText
                 android:id="@+id/cvv"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:textColor="@color/black"
-                android:paddingHorizontal="20dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bg_rounded_corner" />
+                android:autofillHints="creditCardSecurityCode"
+                android:background="@drawable/bg_rounded_corner"
+                android:inputType="number"
+                android:paddingHorizontal="20dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date_expiration"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:labelFor="@id/expirationDate"/>
 
             <EditText
                 android:id="@+id/expirationDate"
                 android:layout_width="300dp"
-                android:paddingHorizontal="20dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/bg_rounded_corner"
+                android:inputType="date"
+                android:paddingHorizontal="20dp"
                 android:textColor="@color/black"
-                android:background="@drawable/bg_rounded_corner" />
+                android:autofillHints="creditCardExpirationDate"/>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
     <Button
         android:id="@+id/buy_button"
         android:layout_width="match_parent"
