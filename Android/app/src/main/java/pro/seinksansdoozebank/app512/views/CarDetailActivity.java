@@ -24,28 +24,35 @@ import pro.seinksansdoozebank.app512.model.ListCar;
 
 public class CarDetailActivity extends AppCompatActivity {
 
-    private Bitmap carBitmap;
-    private final Object synchro = new Object();
+    /**
+     * La voiture a afficher
+     */
     private Car car;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_detail);
+
+        // Recupere les donnees de l intent
         int carId = getIntent().getIntExtra("carId", 0);
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(v -> finish());
-
+        // Recupere les elements de la vue
         ImageView carImage = findViewById(R.id.car_image);
         TextView carName = findViewById(R.id.car_name);
         TextView carPrice = findViewById(R.id.car_price);
         TextView carDescription = findViewById(R.id.car_description);
+
+        // Affiche les donnees de la voiture
         car = ListCar.getInstance().get(carId);
-        Picasso.get().load(car.getImage()).into(carImage);
+        Picasso.get().load(car.getImage()).into(carImage); // image async
 
         carName.setText(String.format("%s %s",car.getMarque(),car.getName()));
         carPrice.setText(String.format(Locale.FRANCE,"%.2f€",car.getPrice()));
         carDescription.setText(car.getDescription());
 
+
+        // Ajoute un listener au bouton d achat pour ouvrir la carte de choix de l adresse
         Button buyButton = findViewById(R.id.buy_button);
         buyButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MapActivity.class);

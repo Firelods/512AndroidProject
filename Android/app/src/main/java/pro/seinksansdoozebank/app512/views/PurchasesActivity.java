@@ -38,10 +38,18 @@ public class PurchasesActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
+
+
+        // On remplie la liste des achats
         fillListView();
     }
 
+
+    /**
+     * Remplie la liste des achats
+     */
     private void fillListView() {
+        //Recuperation du JSON en local
         JSONObject obj = JSONTool.readJSON(this.getApplicationContext(), "purchases.json");
         JSONArray arr;
         try {
@@ -50,6 +58,7 @@ public class PurchasesActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
         ArrayList<Purchase> purchases = new ArrayList<>();
+        // On ajout dans une array list, tous les achats presents dans le JSON
         for (int i = 0; i < arr.length(); i++) {
             try {
                 System.out.println(arr.getJSONObject(i));
@@ -58,6 +67,8 @@ public class PurchasesActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         }
+
+        // Une fois tous les elements dans l arraylist on demarre l adapter avec tous les items
         ListView listView = findViewById(R.id.purchase_list);
         PurchaseAdapter adapter = new PurchaseAdapter(this, purchases);
         listView.setAdapter(adapter);

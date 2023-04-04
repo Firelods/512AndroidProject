@@ -28,7 +28,6 @@ public class CarAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
     private CarAdapterListener listener;
-    private Bitmap carBitmap;
 
     private final Object synchro = new Object();
 

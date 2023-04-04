@@ -216,7 +216,7 @@ public class PaymentActivity extends AppCompatActivity {
             message += "CVV invalide\n";
         }
         if (!dateValid) {
-            message += "Date invalide";
+            message += "Date expiration invalide";
         }
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
