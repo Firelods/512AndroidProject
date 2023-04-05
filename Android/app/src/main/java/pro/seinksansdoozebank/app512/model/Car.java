@@ -2,12 +2,34 @@ package pro.seinksansdoozebank.app512.model;
 
 import androidx.annotation.NonNull;
 
+/**
+ * Classe représentant une voiture vendue sur l'application
+ */
 public class Car {
+
+    /**
+     * Identifiant de la voiture (sa  position dans le singleton ListCar)
+     */
     private final int id;
+    /**
+     * Modèle de la voiture
+     */
     private final String nom;
+    /**
+     * Marque de la voiture
+     */
     private final String marque;
+    /**
+     * Description de la voiture
+     */
     private final String description;
+    /**
+     * Prix de vente de la voiture
+     */
     private final double prix;
+    /**
+     * URL de l'image de la voiture
+     */
     private final String image;
 
 

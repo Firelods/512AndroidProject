@@ -1,9 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".views.CarDetailActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="pro.seinksansdoozebank.app512.util.ToolBarFragment"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top|center"
+        android:orientation="vertical"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+
+        <ImageView
+            android:id="@+id/car_image"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/car"
+            android:contentDescription="@string/product_image_description"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="220dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/car_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/product_name"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/car_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/product_description"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+            </LinearLayout>
+        </ScrollView>
+        <TextView
+            android:id="@+id/car_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:text="@string/product_price"
+            android:textColor="@color/black"
+            android:layout_marginTop="15dp"/>
+        <Button
+            android:id="@+id/buy_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_rounded_corner"
+            android:backgroundTint="@color/blue"
+            android:paddingTop="15dp"
+            android:layout_marginHorizontal="40dp"
+            android:paddingBottom="15dp"
+            android:text="@string/buy_button_text"
+            android:textSize="30sp"
+            android:elevation="20dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

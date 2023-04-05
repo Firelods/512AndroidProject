@@ -1,9 +1,36 @@
 <resources>
-    <string name="app_name">512Car</string>
-    <string name="appName">512Car</string>
+    <string name="app_name">512Cars</string>
+    <string name="appName">512Cars</string>
     <string name="purchase_icon_description">Icon of a shopping cart</string>
     <string name="product_name">Product Name</string>
     <string name="product_price">XXXXX.XX€</string>
     <string name="product_image_description">Image of the car</string>
     <string name="product_brand">Brand</string>
+    <string name="buy_button_text">Commander</string>
+    <string name="back_arrow_description">An arrow allowing to return to the previous screen</string>
+    <string name="confirm_place_button">Valider</string>
+    <string name="channel_name">512Cars</string>
+    <string name="channel_description">Notification channel used by 512Cars</string>
+    <string name="channel_id">512Cars</string>
+    <string name="notification_title">Confirmation de commande</string>
+    <string name="notification_text">512Cars vous remercie pour votre achat ! Votre commande a bien été prise en compte.</string>
+    <string name="product_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dapibus libero urna, a auctor sem feugiat et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam rhoncus ullamcorper ligula, in porttitor nisl ultrices non. Fusce malesuada mattis condimentum. Integer laoreet erat a leo congue cursus.</string>
+
+
+    <string name="saisir_l_adresse_de_livraison">Saisir l\'adresse de livraison</string>
+    <string name="rechercher">Rechercher</string>
+    <string name="prenom">Prénom</string>
+    <string name="nom">Nom</string>
+    <string name="date_livraison">Date de livraison</string>
+    <string name="cb">Numéro de carte bancaire</string>
+    <string name="date_expiration">Date d\'expiration</string>
+    <string name="cvv">CVV</string>
+    <string name="purchase_date">date</string>
+    <string name="delivery_place">ville</string>
+    <string name="toolBarTitle">ToolBarTitle</string>
+    <string name="detail_activity_title">Détails de la voiture</string>
+    <string name="map_activity_title">Choix du lieu de livraison</string>
+    <string name="payment_activity_title">Paiement</string>
+    <string name="purchases_activity_title">Mes achats</string>
+
 </resources>
